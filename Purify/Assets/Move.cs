@@ -38,6 +38,7 @@ public class Move : MonoBehaviour
         if (movement.magnitude!=0)
         {
             transform.position += movement;
+            if(!(Input.GetKey(KeyCode.DownArrow)))
             transform.rotation = Quaternion.Slerp(this.transform.rotation,Quaternion.LookRotation(movement),Time.deltaTime*rotationSpeed);
         }
     }

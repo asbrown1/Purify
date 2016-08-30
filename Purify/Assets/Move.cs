@@ -18,20 +18,20 @@ public class Move : MonoBehaviour
         /*Orientation of camera*/
         Vector3 movement= new Vector3(0,0,0);
         /*Moves relative to camera, but not in vertical axis*/
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow)||Input.GetKey(KeyCode.W))
         {
             movement=this.transform.forward * movementSpeed * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
             movement= this.transform.forward * -movementSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             movement = this.transform.right * movementSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             movement = this.transform.right * -movementSpeed * Time.deltaTime;
         }

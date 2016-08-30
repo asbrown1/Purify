@@ -4,7 +4,8 @@ using System;
 
 public class Move : MonoBehaviour
 {
-    public float force;
+    public float movementSpeed = 5f;
+    public float rotationSpeed = 5f;
     public Camera mainCam;
     // Use this for initialization
     void Start()
@@ -15,29 +16,29 @@ public class Move : MonoBehaviour
     void Update()
     {
         /*Orientation of camera*/
-        Vector3 forwardCam = mainCam.transform.forward;
-        Vector3 rightCam = mainCam.transform.right;
-        forwardCam = forwardCam / forwardCam.magnitude;
-        rightCam = rightCam / rightCam.magnitude;
-
-
+        Vector3 movement= new Vector3(0,0,0);
         /*Moves relative to camera, but not in vertical axis*/
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.Translate(new Vector3(forwardCam.x,0, forwardCam.z) * force * Time.deltaTime);
+            movement=this.transform.forward * movementSpeed * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.Translate(new Vector3(forwardCam.x, 0, forwardCam.z) * -force * Time.deltaTime);
+            movement= this.transform.forward * -movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Translate(new Vector3(rightCam.x, 0, rightCam.z) * force * Time.deltaTime);
+            movement = this.transform.right * movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Translate(new Vector3(rightCam.x, 0, rightCam.z) * -force * Time.deltaTime);
+            movement = this.transform.right * -movementSpeed * Time.deltaTime;
+        }
+        if (movement.magnitude!=0)
+        {
+            transform.position += movement;
+            transform.rotation = Quaternion.Slerp(this.transform.rotation,Quaternion.LookRotation(movement),Time.deltaTime*rotationSpeed);
         }
     }
 }

@@ -70,12 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AIPhase.cs" />
-    <Compile Include="Assets\Colo.cs" />
     <Compile Include="Assets\FollowPlayer.cs" />
-    <Compile Include="Assets\FollowPlayerBackup.cs" />
     <Compile Include="Assets\Move.cs" />
     <Compile Include="Assets\Patrol.cs" />
-    <Compile Include="Assets\Phase.cs" />
     <Compile Include="Assets\SeePlayerCheck.cs" />
   </ItemGroup>
   <ItemGroup>

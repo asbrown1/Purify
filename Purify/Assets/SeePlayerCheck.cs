@@ -5,9 +5,10 @@ public class SeePlayerCheck : MonoBehaviour {
     public GameObject[] targets;
     public float fieldOfView;
     public float visionRange;
+    AIPhase phase;
 	// Use this for initialization
 	void Start () {
-	
+        phase = GetComponent<AIPhase>();
 	}
 	
 	// Update is called once per frame
@@ -21,8 +22,12 @@ public class SeePlayerCheck : MonoBehaviour {
             {
                 if (Physics.Raycast(transform.position,rayDirection, out hit, visionRange))
                 {
-                    if(hit.transform.name==targets[i].transform.name)
-                    Debug.Log(this.gameObject.name + "can see " + hit.transform.name);
+                    if (hit.transform.name == targets[i].transform.name)
+                    {
+                        Debug.Log(this.gameObject.name + "can see " + hit.transform.name);
+                        if(!(phase.getPhase().Equals("Attack")))
+                            phase.setPhase("Attack");
+                    }
                 }
             }
         }

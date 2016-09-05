@@ -5,7 +5,8 @@ public class Attack : MonoBehaviour {
     AIPhase phase;
     SeePlayerCheck targetGet;
     NavMeshAgent agent;
-    public int health=100;
+    public int maxHealth=100;
+    int health;
     public float rechargeTime=3.0f;
     float timeLeft=0.0f;
     public int attack = 5;
@@ -14,6 +15,7 @@ public class Attack : MonoBehaviour {
         phase = GetComponent<AIPhase>();
         targetGet = GetComponent<SeePlayerCheck>();
         agent = GetComponent<NavMeshAgent>();
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -57,4 +59,14 @@ public class Attack : MonoBehaviour {
         health = health - amount;
         Debug.Log(gameObject.name + " now has " + health + " health");
 	}
+
+    public int getHealth()
+    {
+        return health;
+    }
+
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
 }

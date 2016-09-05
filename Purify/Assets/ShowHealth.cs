@@ -24,10 +24,10 @@ public class ShowHealth : MonoBehaviour {
         float percentHealth = (float)health / maxHealth;
         float percentDamage = (float)(maxHealth - health) / maxHealth;
         float healthOffset = -((width * percentDamage)/width)/2;
-        float damageOffset = width;
+        float damageOffset = ((width * percentHealth) / width) / 2;
         healthLeft.sizeDelta = new Vector2(width * percentHealth,height);
         damageTaken.sizeDelta = new Vector2(width * percentDamage,height);
-        /*healthLeft.transform.position=new Vector3(healthOffset,0,0);
-        damageTaken.transform.position=new Vector3(damageOffset, 0, 0);*/
+        healthLeft.transform.localPosition=new Vector3(healthOffset,0,0);
+        damageTaken.transform.localPosition=new Vector3(damageOffset, 0, 0);
     }
 }

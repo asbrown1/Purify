@@ -23,6 +23,7 @@ public class Patrol : MonoBehaviour {
                 if (waypoints.Length > currentWaypoint + 1)
                 {
                     currentWaypoint++;
+                    Debug.Log(gameObject.name + " entering waypoint " + currentWaypoint);
                 }
                 else
                     currentWaypoint = 0;

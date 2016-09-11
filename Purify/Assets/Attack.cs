@@ -8,6 +8,7 @@ public class Attack : MonoBehaviour {
     public float rechargeTime=3.0f;
     float timeLeft=0.0f;
     public int attack = 5;
+    public float attackSpeed=30.0f;
     // Use this for initialization
     void Start () {
         phase = GetComponent<AIPhase>();
@@ -21,6 +22,7 @@ public class Attack : MonoBehaviour {
         {
             if (phase.getPhase().Equals("Attack"))
             {
+                agent.speed = attackSpeed;
                 Health targetHealth;
                 GameObject target = GameObject.Find(targetGet.getTarget());
                 if (target)

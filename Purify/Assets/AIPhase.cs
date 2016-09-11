@@ -3,6 +3,7 @@ using System.Collections;
 
 public class AIPhase : MonoBehaviour {
 
+    public string defaultPhase="";
     string currentPhase;
 	// Use this for initialization
 	void Start () {
@@ -22,5 +23,9 @@ public class AIPhase : MonoBehaviour {
     {
         currentPhase = toSet;
         Debug.Log("Phase set to " + currentPhase + " for " +gameObject.name);
+    }
+    public void setDefaultPhase()
+    {
+        currentPhase = defaultPhase;
     }
 }

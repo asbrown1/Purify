@@ -5,8 +5,6 @@ public class Attack : MonoBehaviour {
     AIPhase phase;
     SeePlayerCheck targetGet;
     NavMeshAgent agent;
-    public int maxHealth=100;
-    int health;
     public float rechargeTime=3.0f;
     float timeLeft=0.0f;
     public int attack = 5;
@@ -15,7 +13,6 @@ public class Attack : MonoBehaviour {
         phase = GetComponent<AIPhase>();
         targetGet = GetComponent<SeePlayerCheck>();
         agent = GetComponent<NavMeshAgent>();
-        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -24,11 +21,11 @@ public class Attack : MonoBehaviour {
         {
             if (phase.getPhase().Equals("Attack"))
             {
-                Attack targetAttack;
+                Health targetHealth;
                 GameObject target = GameObject.Find(targetGet.getTarget());
                 if (target)
                 {
-                    targetAttack = target.GetComponent<Attack>();
+                    targetHealth = target.GetComponent<Health>();
                     if (Vector3.Distance(this.transform.position, target.transform.position) > 3)
                         agent.destination = target.transform.position;
                     else
@@ -36,7 +33,11 @@ public class Attack : MonoBehaviour {
                         agent.destination = this.transform.position;
                         if (timeLeft <= 0)
                         {
-                            targetAttack.reduceHealth(attack);
+                            Debug.Log(gameObject.name);
+                            targetHealth.reduceHealth(attack);
+                            if(target.name!="Player")
+                                setTargetToAttacker(target);
+                            Debug.Log(targetGet.name + " should attack " + gameObject.name);
                             timeLeft = rechargeTime;
                         }
                     }
@@ -51,22 +52,10 @@ public class Attack : MonoBehaviour {
         {
             timeLeft = timeLeft-Time.deltaTime;
         }
-        if (health <= 0)
-            Destroy(this.gameObject);
     }
-    public void reduceHealth(int amount)
+    void setTargetToAttacker(GameObject target)
     {
-        health = health - amount;
-        Debug.Log(gameObject.name + " now has " + health + " health");
-	}
-
-    public int getHealth()
-    {
-        return health;
-    }
-
-    public int getMaxHealth()
-    {
-        return maxHealth;
+        SeePlayerCheck swapEnemy = target.GetComponent<SeePlayerCheck>();
+        swapEnemy.setTarget(this.gameObject.name);
     }
 }

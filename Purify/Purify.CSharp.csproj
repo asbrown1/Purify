@@ -73,6 +73,7 @@
     <Compile Include="Assets\Attack.cs" />
     <Compile Include="Assets\FaceCamera.cs" />
     <Compile Include="Assets\FollowPlayer.cs" />
+    <Compile Include="Assets\Health.cs" />
     <Compile Include="Assets\Move.cs" />
     <Compile Include="Assets\Patrol.cs" />
     <Compile Include="Assets\SeePlayerCheck.cs" />

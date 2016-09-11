@@ -57,4 +57,11 @@ public class SeePlayerCheck : MonoBehaviour {
     {
         return targetFound;
     }
+    public void setTarget(String name)
+    {
+        targetFound = name;
+        if (!(phase.getPhase().Equals("Attack")))
+            phase.setPhase("Attack");
+        Debug.Log(this.gameObject.name + " is attacking " + targetFound);
+    }
 }

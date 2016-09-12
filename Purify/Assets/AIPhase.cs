@@ -22,7 +22,7 @@ public class AIPhase : MonoBehaviour {
     public void setPhase(string toSet)
     {
         currentPhase = toSet;
-        Debug.Log("Phase set to " + currentPhase + " for " +gameObject.name);
+        //Debug.Log("Phase set to " + currentPhase + " for " +gameObject.name);
     }
     public void setDefaultPhase()
     {

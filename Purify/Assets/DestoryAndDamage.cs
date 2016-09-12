@@ -4,6 +4,7 @@ using System.Collections;
 public class DestoryAndDamage : MonoBehaviour {
 
     public int bulletDamage = 5;
+    public float timeBeforeDestroy = 2.0f;
 	// Use this for initialization
 	void Start () {
 	
@@ -11,16 +12,19 @@ public class DestoryAndDamage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        timeBeforeDestroy = timeBeforeDestroy-Time.deltaTime;
+        if (timeBeforeDestroy <= 0)
+            Destroy(this.gameObject);
 	}
 
-    void onCollisionEnter(Collision info)
+    void OnCollisionEnter(Collision info)
     {
         Health colliderHealth;
-        if(!(info.collider.name.Contains("Wall")))
+        string colliderName = info.collider.name;
+        if (!(colliderName.Contains("Wall")||colliderName.Contains("Terrain")))
         {
-            Debug.Log("Bullet collided");
-            colliderHealth = info.collider.GetComponent<Health>();
+            Debug.Log("Bullet collided with" +colliderName);
+            colliderHealth = GameObject.Find(colliderName).GetComponent<Health>();
             colliderHealth.reduceHealth(bulletDamage);
             Destroy(this.gameObject);
         }

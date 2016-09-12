@@ -57,23 +57,29 @@ public class Attack : MonoBehaviour {
                 if(attackType.Equals("Ranged"))
                 {
                     GameObject target = GameObject.Find(targetGet.getTarget());
-                    transform.LookAt(target.transform);
-                    if (timeLeft<=0)
+                    if (target)
                     {
-                        RaycastHit hit;     //Ray Hit data
-                        Vector3 rayDirection;
-                        rayDirection = target.transform.position - this.transform.position;
-                        if (Physics.Raycast(transform.position, rayDirection, out hit))
+                        transform.LookAt(target.transform);
+                        if (timeLeft <= 0)
                         {
-                            Rigidbody newBullet=(Rigidbody)Instantiate(bullet, transform.position, Quaternion.identity);
-                            newBullet.AddForce(rayDirection*bulletVelocity);
-                            timeLeft = rechargeTime;
+                            RaycastHit hit;     //Ray Hit data
+                            Vector3 rayDirection;
+                            rayDirection = target.transform.position - this.transform.position;
+                            if (Physics.Raycast(transform.position, rayDirection, out hit))
+                            {
+                                Vector3 playerRotation = transform.rotation.eulerAngles;
+                                float zValue = 2 + Mathf.Cos((playerRotation.y) * Mathf.Deg2Rad);
+                                float xValue = 2 + Mathf.Sin((playerRotation.y) * Mathf.Deg2Rad);
+                                Vector3 bulletStart = new Vector3(transform.position.x + xValue, 0.5f, transform.position.z + zValue);
+                                Rigidbody newBullet = (Rigidbody)Instantiate(bullet, bulletStart, Quaternion.identity);
+                                newBullet.AddForce(rayDirection * bulletVelocity);
+                                timeLeft = rechargeTime;
+                            }
+                            else
+                            {
+                                phase.setDefaultPhase();
+                            }
                         }
-                        else
-                        {
-                            phase.setDefaultPhase();
-                        }
-
                     }
 
                 }

@@ -31,7 +31,7 @@ public class SeePlayerCheck : MonoBehaviour {
                         {
                             if (hit.transform.name == targets[i].transform.name)
                             {
-                                Debug.Log(this.gameObject.name + "can see " + hit.transform.name);
+                                //Debug.Log(this.gameObject.name + "can see " + hit.transform.name);
                                 if (!(phase.getPhase().Equals("Attack")))
                                 {
                                     phase.setPhase("Attack");
@@ -42,7 +42,7 @@ public class SeePlayerCheck : MonoBehaviour {
                     }
                     if (Vector3.Magnitude(rayDirection)<2)      //If a target is close enough, it doesn't matter if they are in field of view
                         {
-                        Debug.Log(this.gameObject.name + "can see " + targets[i].transform.name);
+                        //Debug.Log(this.gameObject.name + "can see " + targets[i].transform.name);
                         if (!(phase.getPhase().Equals("Attack")))
                         {
                             phase.setPhase("Attack");

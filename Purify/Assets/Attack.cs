@@ -20,6 +20,14 @@ public class Attack : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        //healing the ai, may not need to be there
+        if (Input.mousePosition == this.transform.position) //this is wrong tbh fam
+        {
+            restoreHealth(attack);
+        }
+
+
         if (this.gameObject.name != "Player")
         {
             if (phase.getPhase().Equals("Attack"))
@@ -68,5 +76,11 @@ public class Attack : MonoBehaviour {
     public int getMaxHealth()
     {
         return maxHealth;
+    }
+
+    public void restoreHealth(int amount)
+    {
+        health = health + amount;
+        Debug.Log(gameObject.name + "now has" + health + "health");
     }
 }

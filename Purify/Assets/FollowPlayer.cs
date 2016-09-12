@@ -21,7 +21,7 @@ public class FollowPlayer : MonoBehaviour {
 	void Update () {
         if (phase.getPhase().Contains("Follow"))
         {
-            if(phase.getPhase().Equals("Follow"))
+            if (phase.getPhase().Equals("Follow"))
                 agent.speed = followSpeed;
             Vector3 playerPosition = player.transform.position;
             Vector3 playerRotation = player.transform.rotation.eulerAngles;

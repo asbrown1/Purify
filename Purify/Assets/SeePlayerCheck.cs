@@ -36,6 +36,7 @@ public class SeePlayerCheck : MonoBehaviour {
                                 {
                                     phase.setPhase("Attack");
                                     targetFound = hit.transform.name;
+                                    Debug.Log("Found " + targetFound);
                                 }
                             }
                         }

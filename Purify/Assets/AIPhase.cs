@@ -4,7 +4,7 @@ using System.Collections;
 public class AIPhase : MonoBehaviour {
 
     public string defaultPhase="";
-    string currentPhase;
+    public string currentPhase;
 	// Use this for initialization
 	void Start () {
 	

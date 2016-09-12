@@ -10,7 +10,7 @@ public class Attack : MonoBehaviour {
     public int attack = 5;
     public float attackSpeed=30.0f;
     public string attackType = "Melee";
-    public Rigidbody bullet;
+    public GameObject bullet;
     public float bulletVelocity = 100.0f;
     // Use this for initialization
     void Start () {
@@ -23,6 +23,7 @@ public class Attack : MonoBehaviour {
     void Update() {
         if (this.gameObject.name != "Player")
         {
+            agent.angularSpeed = agent.speed * 120;
             if (phase.getPhase().Equals("Attack"))
             {
                 if (attackType.Equals("Melee"))
@@ -67,13 +68,14 @@ public class Attack : MonoBehaviour {
                             rayDirection = target.transform.position - this.transform.position;
                             if (Physics.Raycast(transform.position, rayDirection, out hit))
                             {
-                                Vector3 playerRotation = transform.rotation.eulerAngles;
-                                float zValue = 2 + Mathf.Cos((playerRotation.y) * Mathf.Deg2Rad);
-                                float xValue = 2 + Mathf.Sin((playerRotation.y) * Mathf.Deg2Rad);
-                                Vector3 bulletStart = new Vector3(transform.position.x + xValue, 0.5f, transform.position.z + zValue);
-                                Rigidbody newBullet = (Rigidbody)Instantiate(bullet, bulletStart, Quaternion.identity);
-                                newBullet.AddForce(rayDirection * bulletVelocity);
-                                timeLeft = rechargeTime;
+                                if (!(hit.collider.name.Contains("Wall")))
+                                {
+                                    Vector3 bulletStart = transform.position;
+                                    GameObject newBullet = (GameObject)Instantiate(bullet, bulletStart, Quaternion.identity);
+                                    DestoryAndDamage speedSet = newBullet.GetComponent<DestoryAndDamage>();
+                                    speedSet.setSpeed(rayDirection / rayDirection.magnitude * bulletVelocity);
+                                    timeLeft = rechargeTime;
+                                }
                             }
                             else
                             {

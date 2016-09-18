@@ -9,6 +9,10 @@ public class Attack : MonoBehaviour {
     float timeLeft=0.0f;
     public int attack = 5;
     public float attackSpeed=30.0f;
+    public string attackType = "Melee";
+    public GameObject bullet;
+    public float bulletVelocity = 100.0f;
+    public bool detailedLog = false;
     // Use this for initialization
     void Start () {
         phase = GetComponent<AIPhase>();
@@ -20,33 +24,86 @@ public class Attack : MonoBehaviour {
     void Update() {
         if (this.gameObject.name != "Player")
         {
+            agent.angularSpeed = agent.speed * 120;
             if (phase.getPhase().Equals("Attack"))
             {
-                agent.speed = attackSpeed;
-                Health targetHealth;
-                GameObject target = GameObject.Find(targetGet.getTarget());
-                if (target)
+                if(detailedLog)
+                    Debug.Log(this.gameObject.name + " is in the attack phase");
+                if (attackType.Equals("Melee"))
                 {
-                    targetHealth = target.GetComponent<Health>();
-                    if (Vector3.Distance(this.transform.position, target.transform.position) > 3)
-                        agent.destination = target.transform.position;
-                    else
+                    if (detailedLog)
+                        Debug.Log(this.gameObject.name + " is a melee type");
+                    agent.speed = attackSpeed;
+                    Health targetHealth;
+                    GameObject target = GameObject.Find(targetGet.getTarget());
+                    if (target)
                     {
-                        agent.destination = this.transform.position;
-                        if (timeLeft <= 0)
+                        if (detailedLog)
+                            Debug.Log(this.gameObject.name + " is targetting "+target.gameObject.name);
+                        targetHealth = target.GetComponent<Health>();
+                        if (Vector3.Distance(this.transform.position, target.transform.position) > 3)
                         {
-                            Debug.Log(gameObject.name);
-                            targetHealth.reduceHealth(attack);
-                            if(target.name!="Player")
-                                setTargetToAttacker(target);
-                            Debug.Log(targetGet.name + " should attack " + gameObject.name);
-                            timeLeft = rechargeTime;
+                            agent.destination = target.transform.position;
+                            if (detailedLog)
+                                Debug.Log(this.gameObject.name + " is moving towards "+target.gameObject.name);
+                        }
+                        else
+                        {
+                            if (detailedLog)
+                                Debug.Log(this.gameObject.name + " is close enough to " + target.gameObject.name);
+                            agent.destination = this.transform.position;
+                            if (timeLeft <= 0)
+                            {
+                                if (detailedLog)
+                                    Debug.Log(this.gameObject.name + " is attacking " + target.gameObject.name);
+                                targetHealth.reduceHealth(attack);
+                                if (target.name != "Player")
+                                    setTargetToAttacker(target);
+                                timeLeft = rechargeTime;
+                            }
                         }
                     }
+                    else
+                    {
+                        Debug.Log("Taarget not found");
+                        phase.setDefaultPhase();
+                    }
                 }
-                else
+                if(attackType.Equals("Ranged"))
                 {
-                    phase.setPhase("Follow");
+                    GameObject target = GameObject.Find(targetGet.getTarget());
+                    if (target)
+                    {
+                        transform.LookAt(target.transform);
+                        if (timeLeft <= 0)
+                        {
+                            RaycastHit hit;     //Ray Hit data
+                            Vector3 rayDirection;
+                            rayDirection = target.transform.position - this.transform.position;
+                            if (Physics.Raycast(transform.position, rayDirection, out hit))
+                            {
+                                if (!(hit.collider.name.Contains("Wall")))
+                                {
+                                    Vector3 bulletStart = transform.position;
+                                    GameObject newBullet = (GameObject)Instantiate(bullet, bulletStart, Quaternion.identity);
+                                    DestoryAndDamage speedSet = newBullet.GetComponent<DestoryAndDamage>();
+                                    speedSet.setSpeed(rayDirection / rayDirection.magnitude * bulletVelocity);
+                                    timeLeft = rechargeTime;
+                                }
+                                else
+                                {
+                                    Debug.Log("Target not in range for " + this.gameObject.name + " Resume normal pattern");
+                                    phase.setDefaultPhase();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Target not found for " + this.gameObject.name);
+                        phase.setDefaultPhase();
+                    }
+
                 }
             }
         }

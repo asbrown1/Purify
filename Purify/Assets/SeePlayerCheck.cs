@@ -6,6 +6,7 @@ public class SeePlayerCheck : MonoBehaviour {
     public GameObject[] targets;
     public float fieldOfView;
     public float visionRange;
+    public Boolean detailedLog = false;
     AIPhase phase;
     String targetFound="";
 	// Use this for initialization
@@ -24,25 +25,36 @@ public class SeePlayerCheck : MonoBehaviour {
                 Vector3 rayDirection;   //Direction of ray
                 if (targets[i])     //If target still exists
                 {
+                    if(detailedLog)
+                        Debug.Log(this.gameObject.name + " is checking " + targets[i].name);
                     rayDirection = targets[i].transform.position - this.transform.position;
                     if (Vector3.Angle(rayDirection, transform.forward) < fieldOfView)   //If character would be in field of view (without taking into account walls)
                     {
+                        if (detailedLog)
+                            Debug.Log(targets[i].name + " is in field of view of " + this.gameObject.name);
                         if (Physics.Raycast(transform.position, rayDirection, out hit, visionRange))    //Casts a ray in the direction of target to check for walls
                         {
                             if (hit.transform.name == targets[i].transform.name)
                             {
-                                Debug.Log(this.gameObject.name + "can see " + hit.transform.name);
+                                if(detailedLog)
+                                    Debug.Log(targets[i].name + " can see " + this.gameObject.name);
                                 if (!(phase.getPhase().Equals("Attack")))
                                 {
                                     phase.setPhase("Attack");
                                     targetFound = hit.transform.name;
+                                    //Debug.Log("Found " + targetFound);
                                 }
+                            }
+                            else
+                            {
+                                if (detailedLog)
+                                    Debug.Log("A wall is in the way, or character out of vision range");
                             }
                         }
                     }
                     if (Vector3.Magnitude(rayDirection)<2)      //If a target is close enough, it doesn't matter if they are in field of view
                         {
-                        Debug.Log(this.gameObject.name + "can see " + targets[i].transform.name);
+                        //Debug.Log(this.gameObject.name + "can see " + targets[i].transform.name);
                         if (!(phase.getPhase().Equals("Attack")))
                         {
                             phase.setPhase("Attack");

@@ -18,9 +18,10 @@ public class GoBackToPriest : MonoBehaviour {
         float distanceToPriest = Vector3.Magnitude(toPriest);
         if(distanceToPriest>distanceToGoBack)
         {
+            Debug.Log("Going back to priest");
             phase.setPhase("FollowNoAttack");
         }
-        if(distanceToPriest<distanceToAttackAgain)
+        if(distanceToPriest<distanceToAttackAgain&&phase.getPhase().Equals("FollowNoAttack"))
         {
             phase.setPhase("Follow");
         }

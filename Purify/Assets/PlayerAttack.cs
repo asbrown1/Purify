@@ -9,6 +9,9 @@ public class PlayerAttack : MonoBehaviour {
     Light attackLight;
     public float attackLength=1.0f;
     public float flareTime=0.2f;
+    public int knockbackStrength = 40;
+    public float attackWidth=4.0f;
+    public int targetAccuracy = 10;
     float flareStart;
     float flareEnd;
     float middleTime;
@@ -74,7 +77,7 @@ public class PlayerAttack : MonoBehaviour {
         else
         {
             attackFlare.brightness = (float)(-peakFlareIntensity * 200 * (timeSinceStart - flareStart) * (timeSinceStart - flareEnd));
-            attackLine.SetPosition(1, new Vector3(0, 0.5f, ((timeSinceStart-flareStart) * lineLength*5)));
+            attackLine.SetPosition(1, new Vector3(0, 0.5f, ((timeSinceStart-flareStart) * lineLength)));
         }
         timeSinceStart = timeSinceStart + Time.deltaTime;
         
@@ -86,13 +89,24 @@ public class PlayerAttack : MonoBehaviour {
         RaycastHit hit;     //Ray Hit data
         Health hitHealth;
         GameObject targetHit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, lineLength))
+        Rigidbody targetBody;
+        bool hasHit = false;
+        int halfTargetAccuracy = targetAccuracy / 2;
+        for (int i = -halfTargetAccuracy; i <= halfTargetAccuracy&&!(hasHit); i++)
         {
-            if (!(hit.transform.name.Contains("Wall") || hit.transform.name.Contains("Terrain") || hit.transform.name.Contains("Bullet")))
+            Vector3 rayPosition = new Vector3(transform.position.x + (i*attackWidth/targetAccuracy), transform.position.y, transform.position.z);
+            Vector3 rayTarget= new Vector3(transform.forward.x + (i * attackWidth / targetAccuracy), transform.forward.y, transform.forward.z);
+            if (Physics.Raycast(rayPosition, rayTarget, out hit, lineLength))
             {
-                targetHit = GameObject.Find(hit.transform.name);
-                hitHealth = targetHit.GetComponent<Health>();
-                hitHealth.reduceHealth(attackDamage);
+                if (!(hit.transform.tag.Equals("Environment") || hit.transform.tag.Equals("Bullet")||hit.transform.tag.Equals("Player")))
+                {
+                    targetHit = GameObject.Find(hit.transform.name);
+                    targetBody = targetHit.GetComponent<Rigidbody>();
+                    hitHealth = targetHit.GetComponent<Health>();
+                    hitHealth.reduceHealth(attackDamage);
+                    hasHit = true;
+                    targetBody.AddForce((this.transform.forward/this.transform.forward.magnitude)*knockbackStrength);
+                }
             }
         }
     }

@@ -82,7 +82,7 @@ public class Attack : MonoBehaviour {
                             rayDirection = target.transform.position - this.transform.position;
                             if (Physics.Raycast(transform.position, rayDirection, out hit))
                             {
-                                if (!(hit.collider.name.Contains("Wall")))
+                                if (!(hit.collider.tag.Equals("Environment")))
                                 {
                                     Vector3 bulletStart = transform.position;
                                     GameObject newBullet = (GameObject)Instantiate(bullet, bulletStart, Quaternion.identity);

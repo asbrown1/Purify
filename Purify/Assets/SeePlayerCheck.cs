@@ -3,41 +3,61 @@ using System.Collections;
 using System;
 
 public class SeePlayerCheck : MonoBehaviour {
-    public GameObject[] targets;
+    GameObject[] targets;
+    GameObject[] targets2;
+    GameObject[] totalTargets;
     public float fieldOfView;
     public float visionRange;
     public Boolean detailedLog = false;
     AIPhase phase;
     String targetFound="";
+    String targetTag;
+    String targetTag2;
 	// Use this for initialization
 	void Start () {
         phase = GetComponent<AIPhase>();
-	}
+        if (this.gameObject.tag.Equals("Enemy"))
+        {
+            targetTag = "FriendlyAI";
+            targetTag2 = "Player";
+        }
+        if (this.gameObject.tag.Equals("FriendlyAI"))
+        {
+            targetTag = "Enemy";
+            targetTag2 = "Untagged";
+        }
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        targets2= GameObject.FindGameObjectsWithTag(targetTag2);
+        totalTargets = new GameObject[targets.Length + targets2.Length];
+        targets.CopyTo(totalTargets, 0);
+        targets2.CopyTo(totalTargets, targets.Length);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
         /*Based on user MattVic's sloution at http://answers.unity3d.com/questions/15735/field-of-view-using-raycasting.html*/
         if (phase.getPhase().Equals("Follow") || phase.getPhase().Equals("Patrol"))
         {
-            for (int i = 0; i < targets.Length; i++)       //Checks for all targets
+            for (int i = 0; i < totalTargets.Length; i++)       //Checks for all targets
             {
                 RaycastHit hit;     //Ray Hit data
                 Vector3 rayDirection;   //Direction of ray
-                if (targets[i])     //If target still exists
+                if (totalTargets[i])     //If target still exists
                 {
                     if(detailedLog)
-                        Debug.Log(this.gameObject.name + " is checking " + targets[i].name);
-                    rayDirection = targets[i].transform.position - this.transform.position;
+                        Debug.Log(this.gameObject.name + " is checking " + totalTargets[i].name);
+                    rayDirection = totalTargets[i].transform.position - this.transform.position;
                     if (Vector3.Angle(rayDirection, transform.forward) < fieldOfView)   //If character would be in field of view (without taking into account walls)
                     {
                         if (detailedLog)
-                            Debug.Log(targets[i].name + " is in field of view of " + this.gameObject.name);
+                            Debug.Log(totalTargets[i].name + " is in field of view of " + this.gameObject.name);
                         if (Physics.Raycast(transform.position, rayDirection, out hit, visionRange))    //Casts a ray in the direction of target to check for walls
                         {
-                            if (hit.transform.name == targets[i].transform.name)
+                            if (hit.transform.name == totalTargets[i].transform.name)
                             {
                                 if(detailedLog)
-                                    Debug.Log(targets[i].name + " can see " + this.gameObject.name);
+                                    Debug.Log(totalTargets[i].name + " can see " + this.gameObject.name);
                                 if (!(phase.getPhase().Equals("Attack")))
                                 {
                                     phase.setPhase("Attack");
@@ -58,7 +78,7 @@ public class SeePlayerCheck : MonoBehaviour {
                         if (!(phase.getPhase().Equals("Attack")))
                         {
                             phase.setPhase("Attack");
-                            targetFound = targets[i].transform.name;
+                            targetFound = totalTargets[i].transform.name;
                         }
                     }
                 }

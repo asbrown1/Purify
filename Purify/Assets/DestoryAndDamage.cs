@@ -27,12 +27,14 @@ public class DestoryAndDamage : MonoBehaviour {
     {
         Health colliderHealth;
         string colliderName = other.name;
+        string colliderTag = other.tag;
         Debug.Log(colliderName);
         Debug.Log("Time alive is " + timeAlive);
         if (timeAlive > 0.01)
         {
             Debug.Log("Time alive is " + timeAlive);
-            if (!(colliderName.Contains("Wall") || colliderName.Contains("Terrain")))
+            Debug.Log("Collider is of type " + colliderTag);
+            if (!(colliderTag.Equals("Environment")))
             {
                 Debug.Log("Bullet collided with" + colliderName);
                 colliderHealth = GameObject.Find(colliderName).GetComponent<Health>();

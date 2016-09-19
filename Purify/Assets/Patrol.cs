@@ -6,6 +6,7 @@ public class Patrol : MonoBehaviour {
     int currentWaypoint =0;
     NavMeshAgent agent;
     AIPhase phase;
+    public float patrolSpeed = 15.0f;
     // Use this for initialization
     void Start () {
         agent = GetComponent<NavMeshAgent>();
@@ -17,6 +18,7 @@ public class Patrol : MonoBehaviour {
 	void Update () {
         if (phase.getPhase().Equals("Patrol"))
         {
+            agent.speed = patrolSpeed;
             Vector3 target = waypoints[currentWaypoint];
             if (target.x == transform.position.x && target.z == transform.position.z)
             {

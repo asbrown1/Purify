@@ -5,45 +5,105 @@ public class Attack : MonoBehaviour {
     AIPhase phase;
     SeePlayerCheck targetGet;
     NavMeshAgent agent;
-    public int maxHealth=100;
-    int health;
     public float rechargeTime=3.0f;
     float timeLeft=0.0f;
     public int attack = 5;
+    public float attackSpeed=30.0f;
+    public string attackType = "Melee";
+    public GameObject bullet;
+    public float bulletVelocity = 100.0f;
+    public bool detailedLog = false;
     // Use this for initialization
     void Start () {
         phase = GetComponent<AIPhase>();
         targetGet = GetComponent<SeePlayerCheck>();
         agent = GetComponent<NavMeshAgent>();
-        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update() {
         if (this.gameObject.name != "Player")
         {
+            agent.angularSpeed = agent.speed * 120;
             if (phase.getPhase().Equals("Attack"))
             {
-                Attack targetAttack;
-                GameObject target = GameObject.Find(targetGet.getTarget());
-                if (target)
+                if(detailedLog)
+                    Debug.Log(this.gameObject.name + " is in the attack phase");
+                if (attackType.Equals("Melee"))
                 {
-                    targetAttack = target.GetComponent<Attack>();
-                    if (Vector3.Distance(this.transform.position, target.transform.position) > 3)
-                        agent.destination = target.transform.position;
-                    else
+                    if (detailedLog)
+                        Debug.Log(this.gameObject.name + " is a melee type");
+                    agent.speed = attackSpeed;
+                    Health targetHealth;
+                    GameObject target = GameObject.Find(targetGet.getTarget());
+                    if (target)
                     {
-                        agent.destination = this.transform.position;
-                        if (timeLeft <= 0)
+                        if (detailedLog)
+                            Debug.Log(this.gameObject.name + " is targetting "+target.gameObject.name);
+                        targetHealth = target.GetComponent<Health>();
+                        if (Vector3.Distance(this.transform.position, target.transform.position) > 3)
                         {
-                            targetAttack.reduceHealth(attack);
-                            timeLeft = rechargeTime;
+                            agent.destination = target.transform.position;
+                            if (detailedLog)
+                                Debug.Log(this.gameObject.name + " is moving towards "+target.gameObject.name);
+                        }
+                        else
+                        {
+                            if (detailedLog)
+                                Debug.Log(this.gameObject.name + " is close enough to " + target.gameObject.name);
+                            agent.destination = this.transform.position;
+                            if (timeLeft <= 0)
+                            {
+                                if (detailedLog)
+                                    Debug.Log(this.gameObject.name + " is attacking " + target.gameObject.name);
+                                targetHealth.reduceHealth(attack);
+                                if (target.name != "Player")
+                                    setTargetToAttacker(target);
+                                timeLeft = rechargeTime;
+                            }
                         }
                     }
+                    else
+                    {
+                        Debug.Log("Taarget not found");
+                        phase.setDefaultPhase();
+                    }
                 }
-                else
+                if(attackType.Equals("Ranged"))
                 {
-                    phase.setPhase("Follow");
+                    GameObject target = GameObject.Find(targetGet.getTarget());
+                    if (target)
+                    {
+                        transform.LookAt(target.transform);
+                        if (timeLeft <= 0)
+                        {
+                            RaycastHit hit;     //Ray Hit data
+                            Vector3 rayDirection;
+                            rayDirection = target.transform.position - this.transform.position;
+                            if (Physics.Raycast(transform.position, rayDirection, out hit))
+                            {
+                                if (!(hit.collider.tag.Equals("Environment")))
+                                {
+                                    Vector3 bulletStart = transform.position;
+                                    GameObject newBullet = (GameObject)Instantiate(bullet, bulletStart, Quaternion.identity);
+                                    DestoryAndDamage speedSet = newBullet.GetComponent<DestoryAndDamage>();
+                                    speedSet.setSpeed(rayDirection / rayDirection.magnitude * bulletVelocity);
+                                    timeLeft = rechargeTime;
+                                }
+                                else
+                                {
+                                    Debug.Log("Target not in range for " + this.gameObject.name + " Resume normal pattern");
+                                    phase.setDefaultPhase();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Target not found for " + this.gameObject.name);
+                        phase.setDefaultPhase();
+                    }
+
                 }
             }
         }
@@ -51,22 +111,10 @@ public class Attack : MonoBehaviour {
         {
             timeLeft = timeLeft-Time.deltaTime;
         }
-        if (health <= 0)
-            Destroy(this.gameObject);
     }
-    public void reduceHealth(int amount)
+    void setTargetToAttacker(GameObject target)
     {
-        health = health - amount;
-        Debug.Log(gameObject.name + " now has " + health + " health");
-	}
-
-    public int getHealth()
-    {
-        return health;
-    }
-
-    public int getMaxHealth()
-    {
-        return maxHealth;
+        SeePlayerCheck swapEnemy = target.GetComponent<SeePlayerCheck>();
+        swapEnemy.setTarget(this.gameObject.name);
     }
 }

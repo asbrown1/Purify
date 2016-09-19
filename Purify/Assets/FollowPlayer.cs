@@ -7,6 +7,7 @@ public class FollowPlayer : MonoBehaviour {
     public float distance = 5.0f;
     public float angle = 30.0f;
     public float force=0.2f;
+    public float followSpeed = 15.0f;
     NavMeshAgent agent;
     AIPhase phase;
     // Use this for initialization
@@ -18,8 +19,10 @@ public class FollowPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (phase.getPhase().Equals("Follow"))
+        if (phase.getPhase().Contains("Follow"))
         {
+            if (phase.getPhase().Equals("Follow"))
+                agent.speed = followSpeed;
             Vector3 playerPosition = player.transform.position;
             Vector3 playerRotation = player.transform.rotation.eulerAngles;
             float zValue = distance * Mathf.Cos((playerRotation.y + angle) * Mathf.Deg2Rad);

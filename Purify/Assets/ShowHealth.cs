@@ -3,13 +3,13 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class ShowHealth : MonoBehaviour {
-    Attack getHealth;
+    Health getHealth;
     public RectTransform main;
     public RectTransform healthLeft;
     public RectTransform damageTaken;
 	// Use this for initialization
 	void Start () {
-        getHealth = GetComponent<Attack>();
+        getHealth = GetComponent<Health>();
         /*main = GetComponent<RectTransform>();
         healthLeft = GetComponent<RectTransform>();
         damageTaken = GetComponent<RectTransform>();*/

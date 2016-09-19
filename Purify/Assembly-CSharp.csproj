@@ -47,7 +47,6 @@
   <ItemGroup>
      <Compile Include="Assets\AIPhase.cs" />
      <Compile Include="Assets\Attack.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\DestoryAndDamage.cs" />
      <Compile Include="Assets\FaceCamera.cs" />
      <Compile Include="Assets\FollowPlayer.cs" />
@@ -142,21 +141,6 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
-=======
-     <Compile Include="Assets\FaceCamera.cs" />
-     <Compile Include="Assets\FollowPlayer.cs" />
-     <Compile Include="Assets\Move.cs" />
-     <Compile Include="Assets\Patrol.cs" />
-     <Compile Include="Assets\SeePlayerCheck.cs" />
-     <Compile Include="Assets\ShowHealth.cs" />
-     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
-     <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
-     <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
-     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
-     <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
-     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
-     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
->>>>>>> refs/remotes/origin/master
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

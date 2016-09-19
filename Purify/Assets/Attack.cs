@@ -128,7 +128,12 @@ public class Attack : MonoBehaviour {
 
     public void restoreHealth(int amount)
     {
+<<<<<<< HEAD
         //health = health + amount;
         //Debug.Log(gameObject.name + "now has" + health + "health");
+=======
+        /*health = health + amount;
+        Debug.Log(gameObject.name + "now has" + health + "health");*/
+>>>>>>> refs/remotes/origin/master
     }
 }

@@ -17,29 +17,42 @@ public class Move : MonoBehaviour
     {
         /*Orientation of camera*/
         Vector3 movement= new Vector3(0,0,0);
+        //Vector3 cameraOrientation = mainCam.transform.rotation.eulerAngles;
+        Vector3 playerMovement = new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z);
+        Vector3 playerMovementRight = new Vector3(mainCam.transform.right.x, 0, mainCam.transform.right.z);
         /*Moves relative to camera, but not in vertical axis*/
         if (Input.GetKey(KeyCode.UpArrow)||Input.GetKey(KeyCode.W))
         {
-            movement=this.transform.forward * movementSpeed * Time.deltaTime;
+            movement=playerMovement * movementSpeed * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
-            movement= this.transform.forward * -movementSpeed * Time.deltaTime;
+            movement= playerMovement * -movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            movement = this.transform.right * movementSpeed * Time.deltaTime;
+            movement = playerMovementRight * movementSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            movement = this.transform.right * -movementSpeed * Time.deltaTime;
+            movement = playerMovementRight * -movementSpeed * Time.deltaTime;
         }
         if (movement.magnitude!=0)
         {
             transform.position += movement;
-            if(!(Input.GetKey(KeyCode.DownArrow)||(Input.GetKey(KeyCode.S))))
-            transform.rotation = Quaternion.Slerp(this.transform.rotation,Quaternion.LookRotation(movement),Time.deltaTime*rotationSpeed);
+            faceCamera();
         }
+    }
+    public float getRotationSpeed()
+    {
+        return rotationSpeed;
+    }
+
+    public void faceCamera()
+    {
+        Vector3 cameraRotation = mainCam.transform.rotation.eulerAngles;
+        Vector3 playerTargetRotation = new Vector3(0, cameraRotation.y, 0);
+        transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(playerTargetRotation), Time.deltaTime * rotationSpeed);
     }
 }

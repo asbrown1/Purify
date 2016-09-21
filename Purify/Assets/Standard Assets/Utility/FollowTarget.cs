@@ -18,11 +18,7 @@ namespace UnityStandardAssets.Utility
         {
             Vector3 offset = startOffset;
             Quaternion targetRotation = Quaternion.Euler(transform.eulerAngles.x, target.eulerAngles.y, transform.eulerAngles.z);
-<<<<<<< HEAD
             transform.Rotate(0, Input.GetAxis("Mouse X")*Time.deltaTime*rotateSpeed, 0, Space.World);
-=======
-            transform.Rotate(0,Input.GetAxis("Mouse X") * rotateSpeed,0,Space.World);
->>>>>>> master
             offset.z = (float)Math.Cos(transform.eulerAngles.y*Mathf.Deg2Rad)*startOffset.z;
             offset.x = (float)Math.Sin(transform.eulerAngles.y*Mathf.Deg2Rad) * startOffset.z;
             transform.position = target.position + offset;

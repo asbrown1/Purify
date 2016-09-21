@@ -7,6 +7,8 @@ public class PlayerAttack : MonoBehaviour {
     LensFlare attackFlare;
     LineRenderer attackLine;
     Light attackLight;
+    Move movement;
+    public Camera mainCam;
     public float attackLength=1.0f;
     public float flareTime=0.2f;
     public int knockbackStrength = 40;
@@ -27,6 +29,7 @@ public class PlayerAttack : MonoBehaviour {
         attackFlare = GetComponent<LensFlare>();
         attackLine = GetComponent<LineRenderer>();
         attackLight = GetComponent<Light>();
+        movement = GetComponent<Move>();
         attackFlare.enabled = false;
         attackLight.enabled = false;
         attackLine.enabled = false;
@@ -43,6 +46,7 @@ public class PlayerAttack : MonoBehaviour {
         }
         if(enabled)
         {
+            movement.faceCamera();
             doAttack();
             if(timeSinceStart>middleTime&&!damageFactored)
             {
@@ -77,7 +81,7 @@ public class PlayerAttack : MonoBehaviour {
         else
         {
             attackFlare.brightness = (float)(-peakFlareIntensity * 200 * (timeSinceStart - flareStart) * (timeSinceStart - flareEnd));
-            attackLine.SetPosition(1, new Vector3(0, 0.5f, ((timeSinceStart-flareStart) * lineLength)));
+            attackLine.SetPosition(1, new Vector3(0, 0.5f, ((timeSinceStart - flareStart) * lineLength)));
         }
         timeSinceStart = timeSinceStart + Time.deltaTime;
         
@@ -90,14 +94,18 @@ public class PlayerAttack : MonoBehaviour {
         Health hitHealth;
         GameObject targetHit;
         Rigidbody targetBody;
+        Vector3 playerRotation = this.transform.rotation.eulerAngles;
         bool hasHit = false;
         int halfTargetAccuracy = targetAccuracy / 2;
         for (int i = -halfTargetAccuracy; i <= halfTargetAccuracy&&!(hasHit); i++)
         {
-            Vector3 rayPosition = new Vector3(transform.position.x + (i*attackWidth/targetAccuracy), transform.position.y, transform.position.z);
-            Vector3 rayTarget= new Vector3(transform.forward.x + (i * attackWidth / targetAccuracy), transform.forward.y, transform.forward.z);
+            float xValue = Mathf.Sin((float)(playerRotation.y+i*attackWidth/targetAccuracy) * Mathf.Deg2Rad) *lineLength;
+            float zValue = Mathf.Cos((float)(playerRotation.y+i*attackWidth/targetAccuracy) * Mathf.Deg2Rad) * lineLength;
+            Vector3 rayPosition = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            Vector3 rayTarget= new Vector3(xValue, 0.5f, zValue);
             if (Physics.Raycast(rayPosition, rayTarget, out hit, lineLength))
             {
+                Debug.DrawRay(rayPosition, rayTarget, Color.green, 5,false);
                 if (!(hit.transform.tag.Equals("Environment") || hit.transform.tag.Equals("Bullet")||hit.transform.tag.Equals("Player")))
                 {
                     targetHit = GameObject.Find(hit.transform.name);

@@ -1,0 +1,61 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class Heal : MonoBehaviour {
+    public int accuracy=4;
+    public float width=10;
+    public int maxLength = 50;
+    public int healStrength = 10;
+    int halfAccuracy;
+	// Use this for initialization
+	void Start () {
+        halfAccuracy = accuracy / 2;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        if (Input.GetMouseButtonDown(0)) //Left click
+        {
+            GameObject [] targets = GameObject.FindGameObjectsWithTag("FriendlyAI");
+            float[] targetDistances = new float [targets.Length];
+            string[] targetName = new string[targets.Length];
+            Vector3[,,] targetLines = new Vector3[targets.Length,accuracy,accuracy];
+            Vector3[,,] targetAngles = new Vector3[targets.Length, accuracy, accuracy];
+            Vector3 mousePos = Input.mousePosition;
+            RaycastHit hit;
+            bool healed = false;
+            for(int i=0;i<targets.Length&&!(healed);i++)      //Get distances to targets, then convert a position in world state equal to their distances away and ending at the mouse click.
+            {
+                targetName[i] = targets[i].gameObject.name;
+                targetDistances[i] = Vector3.Magnitude(this.transform.position - targets[i].transform.position)+3;
+                if(targetDistances[i]>maxLength)
+                {
+                    targetDistances[i] = maxLength;
+                }
+                //targetLines[i,halfAccuracy] = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, targetDistances[i]));
+                for (int j = -halfAccuracy; j < halfAccuracy && !(healed); j++)
+                {
+                    
+                    for(int k=-halfAccuracy;k<halfAccuracy && !(healed); k++)
+                    {
+                        targetLines[i, (j + halfAccuracy), (k+halfAccuracy)] = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x + j * width, mousePos.y + k * width, targetDistances[i]));
+                        if (Physics.Raycast(this.transform.position,targetLines[i, (j + halfAccuracy), k + halfAccuracy]-this.transform.position, out hit, targetDistances[i]))
+                        {
+                            Debug.Log(hit.transform.name);
+                            if (hit.transform.name.Equals(targetName[i]))
+                            {
+                                Health targetHealth = targets[i].GetComponent<Health>();
+                                targetHealth.getHealth(healStrength);
+                                Debug.Log(targetName[i] + " was healed");
+                            }
+                            Debug.DrawRay(this.transform.position, targetLines[i, (j + halfAccuracy), k + halfAccuracy]-this.transform.position, Color.red, 3);
+                        }
+
+                    }
+
+                }
+            }
+
+        }
+	}
+}

@@ -7,7 +7,9 @@ public class Attack : MonoBehaviour {
     NavMeshAgent agent;
     public float rechargeTime=3.0f;
     float timeLeft=0.0f;
+    float buffTime = 0.0f;
     public int attack = 5;
+    int buffAttack = 0;
     public float attackSpeed=30.0f;
     public string attackType = "Melee";
     public GameObject bullet;
@@ -64,7 +66,7 @@ public class Attack : MonoBehaviour {
                             {
                                 if (detailedLog)
                                     Debug.Log(this.gameObject.name + " is attacking " + target.gameObject.name);
-                                targetHealth.reduceHealth(attack);
+                                targetHealth.reduceHealth(attack+buffAttack);
                                 if (target.name != "Player")
                                     setTargetToAttacker(target);
                                 timeLeft = rechargeTime;
@@ -119,6 +121,14 @@ public class Attack : MonoBehaviour {
         {
             timeLeft = timeLeft-Time.deltaTime;
         }
+        if(buffTime>=0)
+        {
+            buffTime = buffTime - Time.deltaTime;
+        }
+        if(buffTime<0)
+        {
+            buffAttack = 0;
+        }
     }
     void setTargetToAttacker(GameObject target)
     {
@@ -130,5 +140,10 @@ public class Attack : MonoBehaviour {
     {
         /*health = health + amount;
         Debug.Log(gameObject.name + "now has" + health + "health");*/
+    }
+    public void getBuff(int strength,float time)
+    {
+        buffAttack = strength;
+        buffTime = time;
     }
 }

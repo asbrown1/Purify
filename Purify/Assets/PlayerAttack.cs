@@ -24,12 +24,14 @@ public class PlayerAttack : MonoBehaviour {
     float timeSinceStart=0.0f;
     bool enabled = false;
     bool damageFactored = false;
+    Mana mana;
     // Use this for initialization
     void Start () {
         attackFlare = GetComponent<LensFlare>();
         attackLine = GetComponent<LineRenderer>();
         attackLight = GetComponent<Light>();
         movement = GetComponent<Move>();
+        mana = GetComponent<Mana>();
         attackFlare.enabled = false;
         attackLight.enabled = false;
         attackLine.enabled = false;
@@ -40,9 +42,10 @@ public class PlayerAttack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(Input.GetKey(KeyCode.Space))
+	    if(Input.GetKey(KeyCode.Space)&&mana.canDoSpell("Attack"))
         {
             enabled = true;
+            mana.reduceMana("Attack");
         }
         if(enabled)
         {

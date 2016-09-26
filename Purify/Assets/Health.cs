@@ -45,4 +45,13 @@ public class Health : MonoBehaviour {
         regenTimeLeft = timeBeforeRegen;
         Debug.Log(gameObject.name + " now has " + health + " health");
     }
+
+    public void getHealth(int amount)
+    {
+        health = health + amount;
+        if(health>maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
 }

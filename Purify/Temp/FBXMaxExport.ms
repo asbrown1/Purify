@@ -26,18 +26,18 @@ fn DialogCallback =
 pluginManager.loadClass FBXIMP;
 pluginManager.loadClass FBXEXP;
 
-openLog "C:/Users/Brendan/DOCUME~1/GitHub/Purify/Purify/Temp/3dsMax.log" mode:"w"
+openLog "C:/Users/aalle/OneDrive/DOCUME~1/Purify/Purify/Temp/3dsMax.log" mode:"w"
 print "Start of log file."; flushLog();
 while true do
 (	
-	if ( fileExists "C:/Users/Brendan/DOCUME~1/GitHub/Purify/Purify/Temp/MaxCommandPipe" ) then
+	if ( fileExists "C:/Users/aalle/OneDrive/DOCUME~1/Purify/Purify/Temp/MaxCommandPipe" ) then
 	(
 		exportNormals = false;
 		exportTangents = false;
 		bakeAnimations = false;
 		useFileUnits = false;
 	
-		waitpipe = (openFile "C:/Users/Brendan/DOCUME~1/GitHub/Purify/Purify/Temp/MaxCommandPipe" mode:"r");
+		waitpipe = (openFile "C:/Users/aalle/OneDrive/DOCUME~1/Purify/Purify/Temp/MaxCommandPipe" mode:"r");
 		filename = (readLine waitpipe);
 		
 		for i = 0 to 3 do
@@ -143,7 +143,7 @@ while true do
 					print "Before fbx export"; flushLog();
 					try
 					(
-						exportFile "C:/Users/Brendan/DOCUME~1/GitHub/Purify/Purify/Temp/MaxExportedFBXFile.fbx" #noprompt;
+						exportFile "C:/Users/aalle/OneDrive/DOCUME~1/Purify/Purify/Temp/MaxExportedFBXFile.fbx" #noprompt;
 					)
 					catch
 					(
@@ -152,7 +152,7 @@ while true do
 					print "After fbx export"; flushLog();
 				)
 
-				deleteFile "C:/Users/Brendan/DOCUME~1/GitHub/Purify/Purify/Temp/MaxCommandPipe";
+				deleteFile "C:/Users/aalle/OneDrive/DOCUME~1/Purify/Purify/Temp/MaxCommandPipe";
 				print "Finished max loading and fbx conversion"; flushLog();
 			) -- with defaultAction
 		)

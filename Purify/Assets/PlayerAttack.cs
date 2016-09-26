@@ -109,9 +109,10 @@ public class PlayerAttack : MonoBehaviour {
             if (Physics.Raycast(rayPosition, rayTarget, out hit, lineLength))
             {
                 Debug.DrawRay(rayPosition, rayTarget, Color.green, 5,false);
-                if (!(hit.transform.tag.Equals("Environment") || hit.transform.tag.Equals("Bullet")||hit.transform.tag.Equals("Player")))
+                targetHit = GameObject.Find(hit.transform.name).transform.parent.gameObject;
+                if (!(targetHit.transform.tag.Equals("Environment") || targetHit.transform.tag.Equals("Bullet")||targetHit.transform.tag.Equals("Player")))
                 {
-                    targetHit = GameObject.Find(hit.transform.name);
+                    Debug.Log(targetHit.transform.tag);
                     targetBody = targetHit.GetComponent<Rigidbody>();
                     hitHealth = targetHit.GetComponent<Health>();
                     hitHealth.reduceHealth(attackDamage);

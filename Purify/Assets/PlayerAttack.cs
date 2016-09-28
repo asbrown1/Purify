@@ -109,7 +109,7 @@ public class PlayerAttack : MonoBehaviour {
             if (Physics.Raycast(rayPosition, rayTarget, out hit, lineLength))
             {
                 Debug.DrawRay(rayPosition, rayTarget, Color.green, 5,false);
-                targetHit = GameObject.Find(hit.transform.name).transform.parent.gameObject;
+                targetHit = GameObject.Find(hit.transform.name).transform.root.gameObject;
                 if (!(targetHit.transform.tag.Equals("Environment") || targetHit.transform.tag.Equals("Bullet")||targetHit.transform.tag.Equals("Player")))
                 {
                     Debug.Log(targetHit.transform.tag);

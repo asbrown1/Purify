@@ -8,6 +8,8 @@ public class HealBuff : MonoBehaviour {
     public int healStrength = 10;
     public int buffStrength = 10;
     public float buffTime = 10;
+    public float verticalOffset = 1;
+    public float extraDistance = 5;
     int halfAccuracy;
     Mana mana;
 	// Use this for initialization
@@ -31,12 +33,13 @@ public class HealBuff : MonoBehaviour {
             Vector3[,,] targetLines = new Vector3[targets.Length,accuracy,accuracy];
             Vector3[,,] targetAngles = new Vector3[targets.Length, accuracy, accuracy];
             Vector3 mousePos = Input.mousePosition;
+            Vector3 playerPosition = new Vector3(this.transform.position.x, this.transform.position.y+verticalOffset, this.transform.position.z);
             RaycastHit hit;
             bool healed = false;
             for(int i=0;i<targets.Length&&!(healed);i++)      //Get distances to targets, then convert a position in world state equal to their distances away and ending at the mouse click.
             {
                 targetName[i] = targets[i].gameObject.name;
-                targetDistances[i] = Vector3.Magnitude(this.transform.position - targets[i].transform.position)+3;
+                targetDistances[i] = Vector3.Magnitude(playerPosition - targets[i].transform.position)+extraDistance;
                 if(targetDistances[i]>maxLength)
                 {
                     targetDistances[i] = maxLength;
@@ -48,7 +51,7 @@ public class HealBuff : MonoBehaviour {
                     for(int k=-halfAccuracy;k<halfAccuracy && !(healed); k++)
                     {
                         targetLines[i, (j + halfAccuracy), (k+halfAccuracy)] = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x + j * width, mousePos.y + k * width, targetDistances[i]));
-                        if (Physics.Raycast(this.transform.position,targetLines[i, (j + halfAccuracy), k + halfAccuracy]-this.transform.position, out hit, targetDistances[i]))
+                        if (Physics.Raycast(playerPosition, targetLines[i, (j + halfAccuracy), k + halfAccuracy]-this.transform.position, out hit, targetDistances[i]))
                         {
                             Debug.Log(hit.transform.name);
                             if (hit.transform.name.Equals(targetName[i]))
@@ -69,7 +72,7 @@ public class HealBuff : MonoBehaviour {
                                     mana.reduceMana("Buff");
                                 }
                             }
-                            Debug.DrawRay(this.transform.position, targetLines[i, (j + halfAccuracy), k + halfAccuracy]-this.transform.position, Color.red, 3);
+                            Debug.DrawRay(playerPosition, targetLines[i, (j + halfAccuracy), k + halfAccuracy]-this.transform.position, Color.red, 3);
                         }
 
                     }

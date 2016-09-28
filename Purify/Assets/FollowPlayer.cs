@@ -19,6 +19,8 @@ public class FollowPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        float tempDistance = distance;
+        float tempAngle = angle;
         if (phase.getPhase().Contains("Follow"))
         {
             if (phase.getPhase().Equals("Follow"))
@@ -28,6 +30,24 @@ public class FollowPlayer : MonoBehaviour {
             float zValue = distance * Mathf.Cos((playerRotation.y + angle) * Mathf.Deg2Rad);
             float xValue = distance * Mathf.Sin((playerRotation.y + angle) * Mathf.Deg2Rad);
             Vector3 playerOffset = new Vector3(playerPosition.x + xValue, playerPosition.y, playerPosition.z + zValue); //Target position from player
+            Vector3 directionFromPlayer = playerOffset - playerPosition;
+            Vector3 normalizedDirection = (directionFromPlayer / directionFromPlayer.magnitude);
+            RaycastHit hit;
+            if(Physics.Raycast(playerPosition,normalizedDirection, out hit,distance))
+            {
+                if((hit.transform.root.tag.Equals("Environment")))  //i.e. There is a wall in the way
+                {
+                    tempDistance = hit.distance;
+                    if (tempDistance < 1)
+                    {
+                        tempAngle = 90;
+                        tempDistance = 2;
+                    }
+                    xValue= tempDistance * Mathf.Sin((playerRotation.y + tempAngle) * Mathf.Deg2Rad);
+                    zValue = tempDistance * Mathf.Cos((playerRotation.y + tempAngle) * Mathf.Deg2Rad);
+                    playerOffset = new Vector3(playerPosition.x + xValue, playerPosition.y, playerPosition.z + zValue);
+                }
+            }
             agent.destination = playerOffset;
         }
 	}

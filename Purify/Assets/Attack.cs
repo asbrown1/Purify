@@ -29,14 +29,6 @@ public class Attack : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
-        //healing the ai, may not need to be there
-        if (Input.mousePosition == this.transform.position) //this is wrong tbh fam
-        {
-            restoreHealth(attack);
-        }
-
-
         if (this.gameObject.name != "Player")
         {
             agent.angularSpeed = agent.speed * 120;
@@ -153,16 +145,6 @@ public class Attack : MonoBehaviour {
         swapEnemy.setTarget(this.gameObject.name);
         }
 
-    public void restoreHealth(int amount)
-    {
-// HEAD
-        //health = health + amount;
-        //Debug.Log(gameObject.name + "now has" + health + "health");
-//=======
-        /*health = health + amount;
-        Debug.Log(gameObject.name + "now has" + health + "health");*/
-//>>>>>>> refs/remotes/origin/master
-    }
     public void getBuff(int strength,float time)
     {
         ParticleSystem particles = GetComponent<ParticleSystem>();

@@ -9,11 +9,15 @@ public class Health : MonoBehaviour {
     public float regenRatePerSecond=5.0f;   //Health healed per second while regenerating
     float regenTimePerHP;                   //Time taken to heal 1HP (calculated from variable above)
     int health;                             //Tracks health
+    float particleTime = 0f;
+    ParticleSystem particles;
     // Use this for initialization
     void Start () {
         health = maxHealth;
         regenTimeLeft = 0;
         regenTimePerHP = 1 / regenRatePerSecond;
+        if (GetComponent<ParticleSystem>())
+            particles = GetComponent<ParticleSystem>();
     }
 	
 	// Update is called once per frame
@@ -27,6 +31,18 @@ public class Health : MonoBehaviour {
         }
         else
             regenTimeLeft = regenTimeLeft - Time.deltaTime;
+        if (particles)
+        {
+            if (particleTime > 0)
+            {
+                particles.Play();
+                particleTime = particleTime - Time.deltaTime;
+            }
+            else if(particles.startColor == Color.green)
+            {
+                particles.Stop();
+            }
+        }
     }
 
     public int getHealth()
@@ -48,6 +64,8 @@ public class Health : MonoBehaviour {
 
     public void getHealth(int amount)
     {
+        particles.startColor = Color.green;
+        particleTime = 0.5f;
         health = health + amount;
         if(health>maxHealth)
         {

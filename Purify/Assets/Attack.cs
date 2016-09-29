@@ -15,15 +15,20 @@ public class Attack : MonoBehaviour {
     public GameObject bullet;
     public float bulletVelocity = 100.0f;
     public bool detailedLog = false;
+    float particleTime = 0f;
+    ParticleSystem particles;
     // Use this for initialization
     void Start () {
         phase = GetComponent<AIPhase>();
         targetGet = GetComponent<SeePlayerCheck>();
         agent = GetComponent<NavMeshAgent>();
+        if(GetComponent<ParticleSystem>())
+            particles = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
 
         //healing the ai, may not need to be there
         if (Input.mousePosition == this.transform.position) //this is wrong tbh fam
@@ -37,7 +42,7 @@ public class Attack : MonoBehaviour {
             agent.angularSpeed = agent.speed * 120;
             if (phase.getPhase().Equals("Attack"))
             {
-                if(detailedLog)
+                if (detailedLog)
                     Debug.Log(this.gameObject.name + " is in the attack phase");
                 if (attackType.Equals("Melee"))
                 {
@@ -49,13 +54,13 @@ public class Attack : MonoBehaviour {
                     if (target)
                     {
                         if (detailedLog)
-                            Debug.Log(this.gameObject.name + " is targetting "+target.gameObject.name);
+                            Debug.Log(this.gameObject.name + " is targetting " + target.gameObject.name);
                         targetHealth = target.GetComponent<Health>();
                         if (Vector3.Distance(this.transform.position, target.transform.position) > 3)
                         {
                             agent.destination = target.transform.position;
                             if (detailedLog)
-                                Debug.Log(this.gameObject.name + " is moving towards "+target.gameObject.name);
+                                Debug.Log(this.gameObject.name + " is moving towards " + target.gameObject.name);
                         }
                         else
                         {
@@ -66,7 +71,7 @@ public class Attack : MonoBehaviour {
                             {
                                 if (detailedLog)
                                     Debug.Log(this.gameObject.name + " is attacking " + target.gameObject.name);
-                                targetHealth.reduceHealth(attack+buffAttack);
+                                targetHealth.reduceHealth(attack + buffAttack);
                                 if (target.name != "Player")
                                     setTargetToAttacker(target);
                                 timeLeft = rechargeTime;
@@ -79,7 +84,7 @@ public class Attack : MonoBehaviour {
                         phase.setDefaultPhase();
                     }
                 }
-                if(attackType.Equals("Ranged"))
+                if (attackType.Equals("Ranged"))
                 {
                     GameObject target = GameObject.Find(targetGet.getTarget());
                     if (target)
@@ -117,24 +122,36 @@ public class Attack : MonoBehaviour {
                 }
             }
         }
-        if(timeLeft>0)
+        if (timeLeft > 0)
         {
-            timeLeft = timeLeft-Time.deltaTime;
+            timeLeft = timeLeft - Time.deltaTime;
         }
-        if(buffTime>=0)
+        if (buffTime >= 0)
         {
             buffTime = buffTime - Time.deltaTime;
         }
-        if(buffTime<0)
+        if (buffTime < 0)
         {
             buffAttack = 0;
         }
+        if (particles)
+        {
+            if (particleTime > 0)
+            {
+                particles.Play();
+                particleTime = particleTime - Time.deltaTime;
+            }
+            else if(particles.startColor==Color.red)
+            {
+                particles.Stop();
+            }
+        }
     }
-    void setTargetToAttacker(GameObject target)
-    {
+        void setTargetToAttacker(GameObject target)
+        {
         SeePlayerCheck swapEnemy = target.GetComponent<SeePlayerCheck>();
         swapEnemy.setTarget(this.gameObject.name);
-    }
+        }
 
     public void restoreHealth(int amount)
     {
@@ -148,6 +165,9 @@ public class Attack : MonoBehaviour {
     }
     public void getBuff(int strength,float time)
     {
+        ParticleSystem particles = GetComponent<ParticleSystem>();
+        particles.startColor = Color.red;
+        particleTime = time;
         buffAttack = strength;
         buffTime = time;
     }

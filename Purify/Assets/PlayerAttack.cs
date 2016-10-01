@@ -67,6 +67,7 @@ public class PlayerAttack : MonoBehaviour {
     }
     void doAttack()
     {
+        //Player attack animation goes here (depending on length, possibly do it at start of else statement)
         attackFlare.enabled = true;
         attackLight.enabled = true;
         attackLine.enabled = true;

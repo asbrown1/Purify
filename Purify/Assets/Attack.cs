@@ -63,6 +63,7 @@ public class Attack : MonoBehaviour {
                             {
                                 if (detailedLog)
                                     Debug.Log(this.gameObject.name + " is attacking " + target.gameObject.name);
+                                //Attack animation goes here
                                 targetHealth.reduceHealth(attack + buffAttack);
                                 if (target.name != "Player")
                                     setTargetToAttacker(target);

@@ -57,6 +57,7 @@ public class Health : MonoBehaviour {
 
     public void reduceHealth(int amount)
     {
+        //Knockback animation goes here (might need to script position too)
         health = health - amount;
         regenTimeLeft = timeBeforeRegen;
         Debug.Log(gameObject.name + " now has " + health + " health");

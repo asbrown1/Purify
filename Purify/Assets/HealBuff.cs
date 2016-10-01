@@ -20,10 +20,10 @@ public class HealBuff : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!mana.canDoSpell("Heal"))
+       0/* if (!mana.canDoSpell("Heal"))
             Debug.Log("Cannot heal");
         if (mana.canDoSpell("Heal"))
-            Debug.Log("Can heal");
+            Debug.Log("Can heal");*/
         if ((Input.GetMouseButtonDown(0)&&mana.canDoSpell("Heal"))||(Input.GetMouseButtonDown(1)&&mana.canDoSpell("Buff"))) //Left click/Right Click
         {
             Debug.Log("Entering buff/heal");
@@ -58,6 +58,7 @@ public class HealBuff : MonoBehaviour {
                             {
                                 if (Input.GetMouseButtonDown(0))
                                 {
+                                    //Heal animation goes here
                                     Health targetHealth = targets[i].GetComponent<Health>();
                                     targetHealth.getHealth(healStrength);
                                     Debug.Log(targetName[i] + " was healed");
@@ -66,6 +67,7 @@ public class HealBuff : MonoBehaviour {
                                 }
                                 if(Input.GetMouseButtonDown(1))
                                 {
+                                    //Buff animation goes here
                                     Attack targetAttack = targets[i].GetComponent<Attack>();
                                     targetAttack.getBuff(buffStrength, buffTime);
                                     healed = true;

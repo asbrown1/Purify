@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour {
 
@@ -23,7 +24,12 @@ public class Health : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (health <= 0)
-            Destroy(this.gameObject);
+        {
+            if (!(this.gameObject.tag.Equals("Player")))
+                Destroy(this.gameObject);
+            else
+                SceneManager.LoadScene("GameOver");
+        }
         if (health < maxHealth && regenTimeLeft < 0)
         {
             health++;

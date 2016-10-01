@@ -90,7 +90,7 @@ public class Attack : MonoBehaviour {
                             rayDirection = target.transform.position - this.transform.position;
                             if (Physics.Raycast(transform.position, rayDirection, out hit))
                             {
-                                if (!(hit.collider.tag.Equals("Environment")))
+                                if (!(hit.collider.gameObject.transform.root.gameObject.tag.Equals("Environment")))
                                 {
                                     Vector3 bulletStart = transform.position;
                                     GameObject newBullet = (GameObject)Instantiate(bullet, bulletStart, Quaternion.identity);

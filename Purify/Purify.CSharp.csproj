@@ -84,6 +84,8 @@
     <Compile Include="Assets\OpenDoor.cs" />
     <Compile Include="Assets\Patrol.cs" />
     <Compile Include="Assets\PlayerAttack.cs" />
+    <Compile Include="Assets\PlayerProgress.cs" />
+    <Compile Include="Assets\SceneLoader.cs" />
     <Compile Include="Assets\SeePlayerCheck.cs" />
     <Compile Include="Assets\ShowHealth.cs" />
     <Compile Include="Assets\ShowPlayerHealth.cs" />

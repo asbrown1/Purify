@@ -26,8 +26,9 @@ public class DestoryAndDamage : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         Health colliderHealth;
-        string colliderName = other.name;
-        string colliderTag = other.tag;
+        GameObject colliderTarget = other.gameObject.transform.root.gameObject;
+        string colliderName = colliderTarget.name;
+        string colliderTag = colliderTarget.tag;
         Debug.Log(colliderName);
         Debug.Log("Time alive is " + timeAlive);
         if (timeAlive > 0.01)
@@ -37,7 +38,7 @@ public class DestoryAndDamage : MonoBehaviour {
             if (!(colliderTag.Equals("Environment")))
             {
                 Debug.Log("Bullet collided with" + colliderName);
-                colliderHealth = GameObject.Find(colliderName).GetComponent<Health>();
+                colliderHealth = colliderTarget.GetComponent<Health>();
                 colliderHealth.reduceHealth(bulletDamage);
                 Debug.Log("Bullet destroyed as collided with character");
                 Destroy(this.gameObject);

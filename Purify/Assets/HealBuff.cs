@@ -20,7 +20,7 @@ public class HealBuff : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-       0/* if (!mana.canDoSpell("Heal"))
+       /* if (!mana.canDoSpell("Heal"))
             Debug.Log("Cannot heal");
         if (mana.canDoSpell("Heal"))
             Debug.Log("Can heal");*/

@@ -79,6 +79,7 @@
     <Compile Include="Assets\Health.cs" />
     <Compile Include="Assets\KeyGet.cs" />
     <Compile Include="Assets\Keys.cs" />
+    <Compile Include="Assets\LoadLevel.cs" />
     <Compile Include="Assets\Mana.cs" />
     <Compile Include="Assets\Move.cs" />
     <Compile Include="Assets\OpenDoor.cs" />

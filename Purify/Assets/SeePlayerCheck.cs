@@ -43,25 +43,28 @@ public class SeePlayerCheck : MonoBehaviour {
             {
                 RaycastHit hit;     //Ray Hit data
                 Vector3 rayDirection;   //Direction of ray
+                Vector3 rayStart = new Vector3(transform.position.x, 1, transform.position.z);
                 if (totalTargets[i])     //If target still exists
                 {
-                    if(detailedLog)
+                    Vector3 targetPosition = new Vector3(totalTargets[i].transform.position.x, 1, totalTargets[i].transform.position.z);
+                    if (detailedLog)
                         Debug.Log(this.gameObject.name + " is checking " + totalTargets[i].name);
-                    rayDirection = totalTargets[i].transform.position - this.transform.position;
+                    rayDirection = targetPosition - rayStart;
                     if (Vector3.Angle(rayDirection, transform.forward) < fieldOfView)   //If character would be in field of view (without taking into account walls)
                     {
                         if (detailedLog)
                             Debug.Log(totalTargets[i].name + " is in field of view of " + this.gameObject.name);
-                        if (Physics.Raycast(transform.position, rayDirection, out hit, visionRange))    //Casts a ray in the direction of target to check for walls
+                        Debug.DrawRay(rayStart, rayDirection, Color.blue);
+                        if (Physics.Raycast(rayStart, rayDirection, out hit, visionRange))    //Casts a ray in the direction of target to check for walls
                         {
-                            if (hit.transform.name == totalTargets[i].transform.name)
+                            if (hit.transform.root.transform.name == totalTargets[i].transform.name)
                             {
                                 if(detailedLog)
                                     Debug.Log(totalTargets[i].name + " can see " + this.gameObject.name);
                                 if (!(phase.getPhase().Equals("Attack")))
                                 {
                                     phase.setPhase("Attack");
-                                    targetFound = hit.transform.name;
+                                    targetFound = hit.transform.root.transform.name;
                                     //Debug.Log("Found " + targetFound);
                                 }
                             }
@@ -78,7 +81,7 @@ public class SeePlayerCheck : MonoBehaviour {
                         if (!(phase.getPhase().Equals("Attack")))
                         {
                             phase.setPhase("Attack");
-                            targetFound = totalTargets[i].transform.name;
+                            targetFound = totalTargets[i].transform.root.transform.name;
                         }
                     }
                 }

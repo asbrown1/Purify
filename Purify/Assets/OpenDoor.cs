@@ -16,7 +16,7 @@ public class OpenDoor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float distance = Vector3.Magnitude(this.transform.position - player.transform.position);
-        Debug.Log(distance);
+        //Debug.Log(distance);
         if (distance < maxDistance && keys.hasKey(keyNeeded))
             {
                 Destroy(this.gameObject);

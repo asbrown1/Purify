@@ -67,6 +67,11 @@ public class Health : MonoBehaviour {
         health = health - amount;
         regenTimeLeft = timeBeforeRegen;
         Debug.Log(gameObject.name + " now has " + health + " health");
+        if(this.transform.tag.Equals("Player"))
+        {
+            Move move = this.GetComponent<Move>();
+            move.stopMove();
+        }
     }
 
     public void getHealth(int amount)

@@ -8,7 +8,8 @@ public class Attack : MonoBehaviour {
     public float rechargeTime=3.0f;
     float timeLeft=0.0f;
     float buffTime = 0.0f;
-    public int attack = 5;
+    public int startAttack = 5;
+    int attack;
     int buffAttack = 0;
     public float attackSpeed=30.0f;
     public string attackType = "Melee";
@@ -19,6 +20,7 @@ public class Attack : MonoBehaviour {
     ParticleSystem particles;
     // Use this for initialization
     void Start () {
+        attack = startAttack;
         phase = GetComponent<AIPhase>();
         targetGet = GetComponent<SeePlayerCheck>();
         agent = GetComponent<NavMeshAgent>();
@@ -48,7 +50,7 @@ public class Attack : MonoBehaviour {
                         if (detailedLog)
                             Debug.Log(this.gameObject.name + " is targetting " + target.gameObject.name);
                         targetHealth = target.GetComponent<Health>();
-                        if (Vector3.Distance(this.transform.position, target.transform.position) > 3)
+                        if (Vector3.Distance(this.transform.position, target.transform.position) > 5)
                         {
                             agent.destination = target.transform.position;
                             if (detailedLog)

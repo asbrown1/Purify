@@ -20,13 +20,15 @@ public class PlayerAttack : MonoBehaviour {
     public float peakLightIntensity = 1.5f;
     public float peakFlareIntensity = 2.0f;
     public float lineLength = 10.0f;
-    public int attackDamage = 10;
+    public int startAttackDamage = 10;
+    int attackDamage;
     float timeSinceStart=0.0f;
     bool enabled = false;
     bool damageFactored = false;
     Mana mana;
     // Use this for initialization
     void Start () {
+        attackDamage = startAttackDamage;
         attackFlare = GetComponent<LensFlare>();
         attackLine = GetComponent<LineRenderer>();
         attackLight = GetComponent<Light>();
@@ -42,7 +44,7 @@ public class PlayerAttack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(Input.GetKey(KeyCode.Space)&&mana.canDoSpell("Attack"))
+	    if(Input.GetKey(KeyCode.Q)&&mana.canDoSpell("Attack"))
         {
             enabled = true;
             mana.reduceMana("Attack");
@@ -122,5 +124,9 @@ public class PlayerAttack : MonoBehaviour {
                 }
             }
         }
+    }
+    public void addStrength(int amount)
+    {
+        attackDamage = startAttackDamage + amount;
     }
 }

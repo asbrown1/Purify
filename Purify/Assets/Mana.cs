@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Mana : MonoBehaviour {
 
-    public int maxMana=100;
+    public int startMaxMana=100;
+    int maxMana;
     public int manaCostHeal=20;
     public int manaCostBuff=20;
     public int manaCostRes = 100;
@@ -22,6 +23,7 @@ public class Mana : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        maxMana = startMaxMana;
         mana = maxMana;
         manaTimePerGain = 1 / manaGainRate;
         manaTimeLeft = manaTimePerGain;
@@ -119,5 +121,9 @@ public class Mana : MonoBehaviour {
     public int getMaxMana()
     {
         return maxMana;
+    }
+    public void addMana(int amount)
+    {
+        maxMana = startMaxMana + amount;
     }
 }

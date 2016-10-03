@@ -60,7 +60,7 @@ public class SeePlayerCheck : MonoBehaviour {
                             if (hit.transform.root.transform.name == totalTargets[i].transform.name)
                             {
                                 if(detailedLog)
-                                    Debug.Log(totalTargets[i].name + " can see " + this.gameObject.name);
+                                    Debug.Log(this.gameObject.name + " can see " + totalTargets[i].name);
                                 if (!(phase.getPhase().Equals("Attack")))
                                 {
                                     phase.setPhase("Attack");

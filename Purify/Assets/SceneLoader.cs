@@ -13,11 +13,17 @@ public class SceneLoader : MonoBehaviour {
 
     public void loadLevel1()
     {
+        PlayerPrefs.SetInt("PlayerExperience", 0);
         SceneManager.LoadScene("Maze1");
     }
 
     public void loadMenu()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void loadInstrunctions()
+    {
+        SceneManager.LoadScene("Instructions");
     }
 }

@@ -1,0 +1,53 @@
+Mono path[0] = 'C:/Users/aalle/OneDrive/Documents/Purify/Purify (Testing Build)_Data/Managed'
+Mono path[1] = 'C:/Users/aalle/OneDrive/Documents/Purify/Purify (Testing Build)_Data/Mono'
+Mono config path = 'C:/Users/aalle/OneDrive/Documents/Purify/Purify (Testing Build)_Data/Mono/etc'
+PlayerConnection initialized from C:/Users/aalle/OneDrive/Documents/Purify/Purify (Testing Build)_Data (debug = 0)
+PlayerConnection initialized network socket : 0.0.0.0 55089
+Multi-casting "[IP] 10.100.245.133 [Port] 55089 [Flags] 2 [Guid] 3712870804 [EditorId] 1192080520 [Version] 1048832 [Id] WindowsPlayer(DESKTOP-EEQBT0R) [Debug] 0" to [225.0.0.222:54997]...
+PlayerConnection already initialized - listening to [10.100.245.133:55089]
+Initialize engine version: 5.4.0f3 (a6d8d714de6f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 5500 (ID=0x1616)
+    Vendor:   Intel
+    VRAM:     2111 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.266 seconds
+Platform assembly: C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\aalle\OneDrive\Documents\Purify\Purify (Testing Build)_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.403791 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 15.072210 ms
+System memory in use before: 16.0 MB.
+System memory in use after: 16.0 MB.
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 282.
+Total: 0.260790 ms (FindLiveObjects: 0.023326 ms CreateObjectMapping: 0.030791 ms MarkObjects: 0.198742 ms  DeleteObjects: 0.006997 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.511784 ms
+System memory in use before: 16.1 MB.
+System memory in use after: 16.1 MB.
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 291.
+Total: 0.452068 ms (FindLiveObjects: 0.022393 ms CreateObjectMapping: 0.022860 ms MarkObjects: 0.396084 ms  DeleteObjects: 0.008864 ms)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 186c -> priority: 1 

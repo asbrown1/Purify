@@ -4,16 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour {
 
-    public int maxHealth = 100;
+    public int startMaxHealth = 100;
+    int maxHealth;
     public float timeBeforeRegen = 10.0f;   //Time character must wait before regenerating after being attacked
     float regenTimeLeft;                    //Time left before healing 1 HP
     public float regenRatePerSecond=5.0f;   //Health healed per second while regenerating
     float regenTimePerHP;                   //Time taken to heal 1HP (calculated from variable above)
     int health;                             //Tracks health
     float particleTime = 0f;
+    public int expPerEnemyKilled=5;
     ParticleSystem particles;
     // Use this for initialization
     void Start () {
+        maxHealth = startMaxHealth;
         health = maxHealth;
         regenTimeLeft = 0;
         regenTimePerHP = 1 / regenRatePerSecond;
@@ -26,7 +29,15 @@ public class Health : MonoBehaviour {
         if (health <= 0)
         {
             if (!(this.gameObject.tag.Equals("Player")))
+            {
+                if (this.gameObject.tag.Equals("Enemy"))
+                {
+                    GameObject player = GameObject.FindGameObjectWithTag("Player");
+                    PlayerProgress exp = player.GetComponent<PlayerProgress>();
+                    exp.gainExperience(expPerEnemyKilled);
+                }
                 Destroy(this.gameObject);
+            }
             else
                 SceneManager.LoadScene("GameOver");
         }
@@ -83,5 +94,9 @@ public class Health : MonoBehaviour {
         {
             health = maxHealth;
         }
+    }
+    public void addHealth(int amount)
+    {
+        maxHealth = startMaxHealth + amount;
     }
 }

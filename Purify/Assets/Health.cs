@@ -70,7 +70,7 @@ public class Health : MonoBehaviour {
         if(this.transform.tag.Equals("Player"))
         {
             Move move = this.GetComponent<Move>();
-            move.stopMove();
+            move.knockBack(); //changed to a knockback function instead
         }
     }
 

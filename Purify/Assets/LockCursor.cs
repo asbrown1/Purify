@@ -5,8 +5,7 @@ public class LockCursor : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	// Update is called once per frame

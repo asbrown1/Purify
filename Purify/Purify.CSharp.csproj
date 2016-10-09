@@ -76,6 +76,7 @@
     <Compile Include="Assets\FollowPlayer.cs" />
     <Compile Include="Assets\GoBackToPriest.cs" />
     <Compile Include="Assets\HealBuff.cs" />
+    <Compile Include="Assets\HealBuffV2.cs" />
     <Compile Include="Assets\Health.cs" />
     <Compile Include="Assets\KeyGet.cs" />
     <Compile Include="Assets\Keys.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\ShowPlayerHealthText.cs" />
     <Compile Include="Assets\ShowPlayerMana.cs" />
     <Compile Include="Assets\ShowPlayerManaText.cs" />
+    <Compile Include="Assets\showTarget.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Blade Sounds\Blade Sounds Readme.txt" />

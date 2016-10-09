@@ -156,4 +156,8 @@ public class Attack : MonoBehaviour {
         buffAttack = strength;
         buffTime = time;
     }
+    public void gainAttack(int amount)
+    {
+        attack = startAttack + amount;
+    }
 }

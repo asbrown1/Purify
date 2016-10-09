@@ -6,10 +6,14 @@ public class PlayerProgress : MonoBehaviour {
     string currentLevel;
     int experience;
     int expLevel;
+    int pickupHealthGain;
+    int pickupManaGain;
     public int[] levelExpNeeded;
     public int[] attackGainLevel;
     public int[] manaGainLevel;
     public int[] healthGainLevel;
+    public int[] healStrengthGainLevel;
+    public int[] buffStrengthGainLevel;
     int numberOfLevels;
 	// Use this for initialization
 	void Start () {
@@ -27,7 +31,21 @@ public class PlayerProgress : MonoBehaviour {
             PlayerPrefs.SetInt("PlayerExpereince", 0);
             experience = 0;
         }
-	}
+        if (PlayerPrefs.HasKey("PickupHealthGain"))
+        {
+            for (int i = 0; i < numberOfLevels; i++)
+            {
+                healthGainLevel[i] = healthGainLevel[i] = PlayerPrefs.GetInt("PickupHealthGain");
+            }
+        }
+        if (PlayerPrefs.HasKey("PickupManaGain"))
+        {
+            for (int i = 0; i < numberOfLevels; i++)
+            {
+                manaGainLevel[i] = manaGainLevel[i] = PlayerPrefs.GetInt("PickupManaGain");
+            }
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {

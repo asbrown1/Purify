@@ -5,8 +5,10 @@ public class HealBuffV2 : MonoBehaviour {
    //public int accuracy=4;
     public float width=10;
     public int maxLength = 50;
-    public int healStrength = 10;
-    public int buffStrength = 10;
+    public int startHealStrength = 20;
+    int healStrength;
+    public int startBuffStrength = 15;
+    int buffStrength;
     public float buffTime = 10;
     public float verticalOffset = 1;
     string currentTarget = "";
@@ -17,6 +19,8 @@ public class HealBuffV2 : MonoBehaviour {
 	void Start () {
         //halfAccuracy = accuracy / 2;
         mana = GetComponent<Mana>();
+        buffStrength = startBuffStrength;
+        healStrength = startHealStrength;
 	}
 	
 	// Update is called once per frame
@@ -80,5 +84,13 @@ public class HealBuffV2 : MonoBehaviour {
     public bool isClosest(string name)
     {
         return (name.Equals(currentTarget));
+    }
+    public void addBuffStrength(int amount)
+    {
+        buffStrength = startBuffStrength + amount;
+    }
+    public void addHealStrength(int amount)
+    {
+        healStrength = startHealStrength + amount;
     }
 }

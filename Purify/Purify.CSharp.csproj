@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AIPhase.cs" />
+    <Compile Include="Assets\AIProgress.cs" />
     <Compile Include="Assets\Attack.cs" />
     <Compile Include="Assets\DestoryAndDamage.cs" />
     <Compile Include="Assets\EnemyDeath.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Assets\Move.cs" />
     <Compile Include="Assets\OpenDoor.cs" />
     <Compile Include="Assets\Patrol.cs" />
+    <Compile Include="Assets\Pickup.cs" />
     <Compile Include="Assets\PlayerAttack.cs" />
     <Compile Include="Assets\PlayerProgress.cs" />
     <Compile Include="Assets\SceneLoader.cs" />

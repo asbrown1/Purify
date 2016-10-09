@@ -45,7 +45,7 @@ public class Attack : MonoBehaviour {
                     agent.speed = attackSpeed;
                     Health targetHealth;
                     GameObject target = GameObject.Find(targetGet.getTarget());
-                    if (target)
+                    if (target&&!(target.GetComponent<AIPhase>().getPhase().Equals("Dead")))
                     {
                         if (detailedLog)
                             Debug.Log(this.gameObject.name + " is targetting " + target.gameObject.name);
@@ -75,7 +75,7 @@ public class Attack : MonoBehaviour {
                     }
                     else
                     {
-                        Debug.Log("Taarget not found");
+                        Debug.Log("Target not found");
                         phase.setDefaultPhase();
                     }
                 }

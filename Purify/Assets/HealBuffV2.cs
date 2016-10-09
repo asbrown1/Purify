@@ -50,7 +50,7 @@ public class HealBuffV2 : MonoBehaviour {
             }
         }
         Debug.Log("Closest is " + currentTarget);
-        if ((Input.GetMouseButtonDown(0) && mana.canDoSpell("Heal")) || (Input.GetMouseButtonDown(1) && mana.canDoSpell("Buff"))) //Left click/Right Click
+        if ((Input.GetMouseButtonDown(0) && mana.canDoSpell("Heal")) || (Input.GetMouseButtonDown(1) && mana.canDoSpell("Buff"))||(Input.GetKeyDown(KeyCode.R)&&mana.canDoSpell("Res"))) //Left click/Right Click
         {
             GameObject target = GameObject.Find(currentTarget);
             if (Input.GetMouseButtonDown(0))
@@ -64,6 +64,16 @@ public class HealBuffV2 : MonoBehaviour {
                 Attack targetAttack = target.GetComponent<Attack>();
                 targetAttack.getBuff(buffStrength,buffTime);
                 mana.reduceMana("Heal");
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Health targetHealth = target.GetComponent<Health>();
+                AIPhase phase = target.GetComponent<AIPhase>();
+                if (phase.getPhase().Equals("Dead"))
+                {
+                    targetHealth.revive();
+                    mana.reduceMana("Res");
+                }
             }
         }
     }

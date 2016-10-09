@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour {
-
+    AIPhase phase;
     public int startMaxHealth = 100;
     int maxHealth;
     public float timeBeforeRegen = 10.0f;   //Time character must wait before regenerating after being attacked
@@ -14,8 +14,10 @@ public class Health : MonoBehaviour {
     float particleTime = 0f;
     public int expPerEnemyKilled=5;
     ParticleSystem particles;
+    public bool detailedLog = false;
     // Use this for initialization
     void Start () {
+        phase = this.GetComponent<AIPhase>();
         maxHealth = startMaxHealth;
         health = maxHealth;
         regenTimeLeft = 0;
@@ -26,7 +28,9 @@ public class Health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (health <= 0)
+        if (detailedLog)
+            Debug.Log("Health is " + health);
+        if (health <= 0&&!(phase.getPhase().Equals("Dead")))
         {
             if (!(this.gameObject.tag.Equals("Player")))
             {
@@ -36,12 +40,12 @@ public class Health : MonoBehaviour {
                     PlayerProgress exp = player.GetComponent<PlayerProgress>();
                     exp.gainExperience(expPerEnemyKilled);
                 }
-                Destroy(this.gameObject);
+                phase.setPhase("Dead");
             }
             else
                 SceneManager.LoadScene("GameOver");
         }
-        if (health < maxHealth && regenTimeLeft < 0)
+        if (health < maxHealth && regenTimeLeft < 0&&!(phase.getPhase().Equals("Dead")))
         {
             health++;
             regenTimeLeft = regenTimePerHP;
@@ -98,5 +102,10 @@ public class Health : MonoBehaviour {
     public void addHealth(int amount)
     {
         maxHealth = startMaxHealth + amount;
+    }
+    public void revive()
+    {
+        health = maxHealth;
+        phase.setPhase("Follow");
     }
 }

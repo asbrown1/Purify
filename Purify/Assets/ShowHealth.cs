@@ -6,10 +6,13 @@ public class ShowHealth : MonoBehaviour {
     Health getHealth;
     public RectTransform main;
     public RectTransform healthLeft;
+    public bool detailedLog=false;
+    Image healthBar;
     //public RectTransform damageTaken;
 	// Use this for initialization
 	void Start () {
         getHealth = GetComponent<Health>();
+        healthBar = this.transform.FindChild("HealthBar").FindChild("Health").FindChild("Background").GetComponent<Image>();
         /*main = GetComponent<RectTransform>();
         healthLeft = GetComponent<RectTransform>();
         damageTaken = GetComponent<RectTransform>();*/
@@ -22,14 +25,17 @@ public class ShowHealth : MonoBehaviour {
         int health = getHealth.getHealth();
         int maxHealth = getHealth.getMaxHealth();
         float percentHealth;
-        if (health == maxHealth)
+        if (health == maxHealth||health<0)
         {
-            percentHealth = 0;
+            healthBar.enabled = false;
         }
         else
         {
-            percentHealth = (float)health / maxHealth;
+            healthBar.enabled = true;
         }
+        percentHealth = (float)health / maxHealth;
+        if (detailedLog)
+            Debug.Log(percentHealth);
         float percentDamage = (float)(maxHealth - health) / maxHealth;
         float healthOffset = -((width * percentDamage)/width)/2;
         //float damageOffset = ((width * percentHealth) / width) / 2;

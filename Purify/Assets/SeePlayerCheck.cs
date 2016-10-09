@@ -44,7 +44,7 @@ public class SeePlayerCheck : MonoBehaviour {
                 RaycastHit hit;     //Ray Hit data
                 Vector3 rayDirection;   //Direction of ray
                 Vector3 rayStart = new Vector3(transform.position.x, 1, transform.position.z);
-                if (totalTargets[i])     //If target still exists
+                if (totalTargets[i]&&!(totalTargets[i].GetComponent<AIPhase>().currentPhase.Equals("Dead")))     //If target still exists
                 {
                     Vector3 targetPosition = new Vector3(totalTargets[i].transform.position.x, 1, totalTargets[i].transform.position.z);
                     if (detailedLog)

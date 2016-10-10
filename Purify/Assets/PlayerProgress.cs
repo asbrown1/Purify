@@ -15,6 +15,7 @@ public class PlayerProgress : MonoBehaviour {
     public int[] healStrengthGainLevel;
     public int[] buffStrengthGainLevel;
     int numberOfLevels;
+    bool hasCheckedStart = false;
 	// Use this for initialization
 	void Start () {
         currentLevel = SceneManager.GetActiveScene().name;
@@ -24,7 +25,6 @@ public class PlayerProgress : MonoBehaviour {
         if(PlayerPrefs.HasKey("PlayerExperience"))
         {
             experience = PlayerPrefs.GetInt("PlayerExperience");
-            checkExpLevel();
         }
         else
         {
@@ -49,7 +49,11 @@ public class PlayerProgress : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	if(!hasCheckedStart)
+        {
+            checkExpLevel();
+            hasCheckedStart = false;
+        }
 	}
 
     public int getExperience()
@@ -80,7 +84,9 @@ public class PlayerProgress : MonoBehaviour {
 
     void checkExpLevel()
     {
+        Debug.Log("Entering CheckEXPLevel. Old level is "+expLevel);
         int oldExpLevel = expLevel;
+
         for(int i=0;i<numberOfLevels;i++)
         {
             if(experience>=levelExpNeeded[i])
@@ -88,8 +94,10 @@ public class PlayerProgress : MonoBehaviour {
                 expLevel = i;
             }
         }
+        Debug.Log("Current level is " + expLevel);
         if(expLevel>oldExpLevel)
         {
+            Debug.Log("Changing stats");
             PlayerAttack attack = GetComponent<PlayerAttack>();
             Mana mana = GetComponent<Mana>();
             Health health = GetComponent<Health>();

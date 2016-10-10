@@ -34,7 +34,7 @@ public class Attack : MonoBehaviour {
         if (this.gameObject.name != "Player")
         {
             agent.angularSpeed = agent.speed * 120;
-            if (phase.getPhase().Equals("Attack"))
+            if (phase.getPhase().Equals("Attack")|| phase.getPhase().Equals("AttackAI"))
             {
                 if (detailedLog)
                     Debug.Log(this.gameObject.name + " is in the attack phase");

@@ -89,6 +89,7 @@
     <Compile Include="Assets\Move.cs" />
     <Compile Include="Assets\OpenDoor.cs" />
     <Compile Include="Assets\Patrol.cs" />
+    <Compile Include="Assets\PauseGame.cs" />
     <Compile Include="Assets\Pickup.cs" />
     <Compile Include="Assets\PlayerAttack.cs" />
     <Compile Include="Assets\PlayerProgress.cs" />

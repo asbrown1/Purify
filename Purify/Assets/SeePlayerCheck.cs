@@ -16,7 +16,7 @@ public class SeePlayerCheck : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         phase = GetComponent<AIPhase>();
-        if (this.gameObject.tag.Equals("Enemy"))
+        if (this.gameObject.tag.Equals("Enemy")||this.gameObject.tag.Equals("Boss"))
         {
             targetTag = "FriendlyAI";
             targetTag2 = "Player";
@@ -24,7 +24,7 @@ public class SeePlayerCheck : MonoBehaviour {
         if (this.gameObject.tag.Equals("FriendlyAI"))
         {
             targetTag = "Enemy";
-            targetTag2 = "Untagged";
+            targetTag2 = "Boss";
         }
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         targets2= GameObject.FindGameObjectsWithTag(targetTag2);

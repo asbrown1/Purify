@@ -102,6 +102,7 @@ public class Health : MonoBehaviour {
     public void addHealth(int amount)
     {
         maxHealth = startMaxHealth + amount;
+        health = maxHealth;
     }
     public void revive()
     {

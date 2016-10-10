@@ -72,6 +72,7 @@
     <Compile Include="Assets\AIPhase.cs" />
     <Compile Include="Assets\AIProgress.cs" />
     <Compile Include="Assets\Attack.cs" />
+    <Compile Include="Assets\BossSpawner.cs" />
     <Compile Include="Assets\DestoryAndDamage.cs" />
     <Compile Include="Assets\EnemyDeath.cs" />
     <Compile Include="Assets\FaceCamera.cs" />

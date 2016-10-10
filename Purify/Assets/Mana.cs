@@ -85,28 +85,28 @@ public class Mana : MonoBehaviour {
     {
         if (type.Equals("Attack"))
         {
-            if (mana > manaCostAttack && attackLeft <= 0)
+            if (mana >= manaCostAttack && attackLeft <= 0)
                 return true;
             else
                 return false;
         }
         else if (type.Equals("Heal"))
         {
-            if (mana > manaCostHeal && healLeft <= 0)
+            if (mana>= manaCostHeal && healLeft <= 0)
                 return true;
             else
                 return false;
         }
         else if (type.Equals("Buff"))
         {
-            if (mana > manaCostBuff && buffLeft <= 0)
+            if (mana >= manaCostBuff && buffLeft <= 0)
                 return true;
             else
                 return false;
         }
         else if (type.Equals("Res"))
         {
-            if (mana > manaCostRes && resLeft > 0)
+            if (mana >= manaCostRes && resLeft > 0)
                 return true;
             else
                 return false;
@@ -125,5 +125,6 @@ public class Mana : MonoBehaviour {
     public void addMana(int amount)
     {
         maxMana = startMaxMana + amount;
+        mana = maxMana;
     }
 }

@@ -63,7 +63,7 @@ public class PlayerProgress : MonoBehaviour {
     }
     public int getExpNextLevel()
     {
-        if (expLevel == numberOfLevels)
+        if (expLevel == numberOfLevels-1)
         {
             return experience;
         }

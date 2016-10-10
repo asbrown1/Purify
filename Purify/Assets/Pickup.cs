@@ -22,7 +22,7 @@ public class Pickup : MonoBehaviour {
             if(type.Equals("Health"))
             {
                 Health health = other.transform.root.GetComponent<Health>();
-                health.addHealth(amount);
+                health.addPickupHealth(amount);
                 if(permanent)
                 {
                     if(PlayerPrefs.HasKey("PickupHealthGain"))
@@ -34,7 +34,7 @@ public class Pickup : MonoBehaviour {
             if(type.Equals("Mana"))
             {
                 Mana mana= other.transform.root.GetComponent<Mana>();
-                mana.addMana(amount);
+                mana.addPickupMana(amount);
                 if (permanent)
                 {
                     if (PlayerPrefs.HasKey("PickupManaGain"))

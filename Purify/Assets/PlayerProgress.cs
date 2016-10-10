@@ -8,19 +8,17 @@ public class PlayerProgress : MonoBehaviour {
     int expLevel;
     int pickupHealthGain;
     int pickupManaGain;
-    public int[] levelExpNeeded;
-    public int[] attackGainLevel;
-    public int[] manaGainLevel;
-    public int[] healthGainLevel;
-    public int[] healStrengthGainLevel;
-    public int[] buffStrengthGainLevel;
-    int numberOfLevels;
+    public int levelExpNeeded;
+    public int attackGainLevel;
+    public int manaGainLevel;
+    public int healthGainLevel;
+    public int healStrengthGainLevel;
+    public int buffStrengthGainLevel;
     bool hasCheckedStart = false;
 	// Use this for initialization
 	void Start () {
         currentLevel = SceneManager.GetActiveScene().name;
         expLevel = 0;
-        numberOfLevels = levelExpNeeded.Length;
         PlayerPrefs.SetString("LastLevel", currentLevel);
         if(PlayerPrefs.HasKey("PlayerExperience"))
         {
@@ -31,26 +29,20 @@ public class PlayerProgress : MonoBehaviour {
             PlayerPrefs.SetInt("PlayerExpereince", 0);
             experience = 0;
         }
-        if (PlayerPrefs.HasKey("PickupHealthGain"))
-        {
-            for (int i = 0; i < numberOfLevels; i++)
-            {
-                healthGainLevel[i] = healthGainLevel[i] = PlayerPrefs.GetInt("PickupHealthGain");
-            }
-        }
-        if (PlayerPrefs.HasKey("PickupManaGain"))
-        {
-            for (int i = 0; i < numberOfLevels; i++)
-            {
-                manaGainLevel[i] = manaGainLevel[i] = PlayerPrefs.GetInt("PickupManaGain");
-            }
-        }
     }
 	
 	// Update is called once per frame
 	void Update () {
-	if(!hasCheckedStart)
+	if(!hasCheckedStart)    //Basically a late 'start' as some things need to run after other scripts start
         {
+            if (PlayerPrefs.HasKey("PickupHealthGain"))
+            {
+                healthGainLevel = healthGainLevel = PlayerPrefs.GetInt("PickupHealthGain");
+            }
+            if (PlayerPrefs.HasKey("PickupManaGain"))
+            {
+                manaGainLevel = manaGainLevel = PlayerPrefs.GetInt("PickupManaGain");
+            }
             checkExpLevel();
             hasCheckedStart = false;
         }
@@ -67,14 +59,7 @@ public class PlayerProgress : MonoBehaviour {
     }
     public int getExpNextLevel()
     {
-        if (expLevel == numberOfLevels-1)
-        {
-            return experience;
-        }
-        else
-        {
-            return levelExpNeeded[expLevel + 1];
-        }
+        return (expLevel+1)*levelExpNeeded;
     }
     public void gainExperience(int amount)
     {
@@ -86,14 +71,7 @@ public class PlayerProgress : MonoBehaviour {
     {
         Debug.Log("Entering CheckEXPLevel. Old level is "+expLevel);
         int oldExpLevel = expLevel;
-
-        for(int i=0;i<numberOfLevels;i++)
-        {
-            if(experience>=levelExpNeeded[i])
-            {
-                expLevel = i;
-            }
-        }
+        expLevel = experience / levelExpNeeded;
         Debug.Log("Current level is " + expLevel);
         if(expLevel>oldExpLevel)
         {
@@ -101,9 +79,9 @@ public class PlayerProgress : MonoBehaviour {
             PlayerAttack attack = GetComponent<PlayerAttack>();
             Mana mana = GetComponent<Mana>();
             Health health = GetComponent<Health>();
-            attack.addStrength(attackGainLevel[expLevel]);
-            mana.addMana(manaGainLevel[expLevel]);
-            health.addHealth(healthGainLevel[expLevel]);
+            attack.addStrength(attackGainLevel*expLevel);
+            mana.addMana(manaGainLevel*expLevel);
+            health.addHealth(healthGainLevel*expLevel);
         }
     }
 }

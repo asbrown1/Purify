@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class AIProgress : MonoBehaviour {
-    public int[] attackGainLevel;
-    public int[] healthGainLevel;
+    public int attackGainLevel;
+    public int healthGainLevel;
     Health health;
     Attack attack;
     PlayerProgress progress;
@@ -31,7 +31,7 @@ public class AIProgress : MonoBehaviour {
 	}
     void buffAI()
     {
-        health.addHealth(healthGainLevel[level]);
-        attack.gainAttack(attackGainLevel[level]);
+        health.addHealth(healthGainLevel*level);
+        attack.gainAttack(attackGainLevel*level);
     }
 }

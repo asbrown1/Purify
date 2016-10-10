@@ -127,4 +127,9 @@ public class Mana : MonoBehaviour {
         maxMana = startMaxMana + amount;
         mana = maxMana;
     }
+    public void addPickupMana(int amount)
+    {
+        maxMana = maxMana + amount;
+        mana = maxMana;
+    }
 }

@@ -104,6 +104,11 @@ public class Health : MonoBehaviour {
         maxHealth = startMaxHealth + amount;
         health = maxHealth;
     }
+    public void addPickupHealth(int amount)
+    {
+        maxHealth = maxHealth + amount;
+        health = maxHealth;
+    }
     public void revive()
     {
         health = maxHealth;

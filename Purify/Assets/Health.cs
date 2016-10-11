@@ -64,6 +64,7 @@ public class Health : MonoBehaviour {
                 particles.Stop();
             }
         }
+
     }
 
     public int getHealth()
@@ -86,6 +87,11 @@ public class Health : MonoBehaviour {
         {
             Move move = this.GetComponent<Move>();
             move.knockBack(); //changed to a knockback function instead
+        }
+        if(this.gameObject.tag.Equals("Enemy"))
+        {
+            Animator anim = this.GetComponent<Animator>();
+            anim.SetTrigger("Knockback");
         }
     }
 

@@ -102,6 +102,7 @@
     <Compile Include="Assets\ShowPlayerMana.cs" />
     <Compile Include="Assets\ShowPlayerManaText.cs" />
     <Compile Include="Assets\ShowSkull.cs" />
+    <Compile Include="Assets\SkeletonSpeed.cs" />
     <Compile Include="Assets\showTarget.cs" />
   </ItemGroup>
   <ItemGroup>

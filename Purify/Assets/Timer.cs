@@ -14,11 +14,13 @@ public class Timer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         time = time + Time.deltaTime;
     }
     public void recordTime()
     {
         PlayerPrefs.SetFloat("Level" + currentLevel, time);
+        PlayerPrefs.Save();
         Debug.Log("Set Level" + currentLevel + " to " + time);
     }
 }

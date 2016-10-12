@@ -20,8 +20,16 @@ public class EnemyDeath : MonoBehaviour {
         {
             if (!triggerSent)
             {
-                body.enabled = false;
-                anim.SetTrigger("Death");
+                if (this.gameObject.tag.Equals("Enemy"))
+                {
+                    body.enabled = false;
+                    anim.SetTrigger("Death");
+                }
+                if (this.gameObject.tag.Equals("Boss"))
+                {
+                    Animation anim = this.transform.GetChild(1).GetComponent<Animation>();
+                    anim.Play("dead");
+                }
                 triggerSent = true;
             }
             animationTime = animationTime - Time.deltaTime;

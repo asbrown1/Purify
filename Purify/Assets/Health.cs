@@ -93,6 +93,11 @@ public class Health : MonoBehaviour {
             Animator anim = this.GetComponent<Animator>();
             anim.SetTrigger("Knockback");
         }
+        if(this.gameObject.tag.Equals("Boss"))
+        {
+            Animation anim = this.transform.GetChild(1).GetComponent<Animation>();
+            anim.Play("damage");
+        }
     }
 
     public void getHealth(int amount)

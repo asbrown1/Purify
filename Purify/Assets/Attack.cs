@@ -66,10 +66,19 @@ public class Attack : MonoBehaviour {
                                 if (detailedLog)
                                     Debug.Log(this.gameObject.name + " is attacking " + target.gameObject.name);
                                 //Attack animation goes here
-                                if(this.gameObject.name.Contains("Skeleton"))
+                                if(this.gameObject.tag.Equals("Enemy"))
                                 {
                                     Animator anim = this.GetComponent<Animator>();
                                     anim.SetTrigger("Attack");
+                                }
+                                if (this.gameObject.tag.Equals("Boss"))
+                                {
+                                    Animation anim = this.transform.GetChild(1).GetComponent<Animation>();
+                                    int random = (int)Random.value * 2;
+                                    if (random == 1)
+                                        anim.Play("attack01");
+                                    else
+                                        anim.Play("attack02");
                                 }
                                 targetHealth.reduceHealth(attack + buffAttack);
                                 if (target.name != "Player")

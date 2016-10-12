@@ -95,6 +95,7 @@
     <Compile Include="Assets\PlayerProgress.cs" />
     <Compile Include="Assets\SceneLoader.cs" />
     <Compile Include="Assets\SeePlayerCheck.cs" />
+    <Compile Include="Assets\SetBossDefault.cs" />
     <Compile Include="Assets\ShowExperience.cs" />
     <Compile Include="Assets\ShowHealth.cs" />
     <Compile Include="Assets\ShowPlayerHealth.cs" />
@@ -102,7 +103,9 @@
     <Compile Include="Assets\ShowPlayerMana.cs" />
     <Compile Include="Assets\ShowPlayerManaText.cs" />
     <Compile Include="Assets\ShowSkull.cs" />
+    <Compile Include="Assets\ShowTimes.cs" />
     <Compile Include="Assets\SkeletonSpeed.cs" />
+    <Compile Include="Assets\Timer.cs" />
     <Compile Include="Assets\showTarget.cs" />
   </ItemGroup>
   <ItemGroup>

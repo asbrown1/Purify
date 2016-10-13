@@ -40,6 +40,11 @@ public class Health : MonoBehaviour {
                     PlayerProgress exp = player.GetComponent<PlayerProgress>();
                     exp.gainExperience(expPerEnemyKilled);
                 }
+                if(this.gameObject.tag.Equals("FriendlyAI"))
+                {
+                    Animator anim=this.GetComponent<Animator>();
+                    anim.SetTrigger("Death");
+                }
                 phase.setPhase("Dead");
             }
             else

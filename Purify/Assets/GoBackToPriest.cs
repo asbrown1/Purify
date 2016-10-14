@@ -16,7 +16,7 @@ public class GoBackToPriest : MonoBehaviour {
 	void Update () {
         Vector3 toPriest = this.transform.position - priest.transform.position;
         float distanceToPriest = Vector3.Magnitude(toPriest);
-        if(distanceToPriest>distanceToGoBack)
+        if(distanceToPriest>distanceToGoBack&&!(phase.getPhase().Equals("Dead")))
         {
             Debug.Log("Going back to priest");
             phase.setPhase("FollowNoAttack");

@@ -61,7 +61,7 @@ public class Attack : MonoBehaviour {
                             if (detailedLog)
                                 Debug.Log(this.gameObject.name + " is close enough to " + target.gameObject.name);
                             agent.destination = this.transform.position;
-                            if (timeLeft <= 0)
+                            if (timeLeft <= 0 && !(this.phase.getPhase().Equals("Dead")))
                             {
                                 if (detailedLog)
                                     Debug.Log(this.gameObject.name + " is attacking " + target.gameObject.name);

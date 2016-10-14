@@ -60,14 +60,20 @@ public class HealBuffV2 : MonoBehaviour {
             if (Input.GetMouseButtonDown(0))
             {
                 Health targetHealth = target.GetComponent<Health>();
-                targetHealth.getHealth(healStrength);
-                mana.reduceMana("Heal");
+                if (!(target.GetComponent<AIPhase>().getPhase().Equals("Dead")))
+                {
+                    targetHealth.getHealth(healStrength);
+                    mana.reduceMana("Heal");
+                }
             }
             if (Input.GetMouseButtonDown(1))
             {
                 Attack targetAttack = target.GetComponent<Attack>();
-                targetAttack.getBuff(buffStrength,buffTime);
-                mana.reduceMana("Heal");
+                if (!(target.GetComponent<AIPhase>().getPhase().Equals("Dead")))
+                {
+                    targetAttack.getBuff(buffStrength, buffTime);
+                    mana.reduceMana("Heal");
+                }
             }
             if (Input.GetKeyDown(KeyCode.R))
             {

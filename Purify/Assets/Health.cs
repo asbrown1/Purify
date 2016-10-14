@@ -97,15 +97,18 @@ public class Health : MonoBehaviour {
             Move move = this.GetComponent<Move>();
             move.knockBack(new Vector3(direction.x,0,direction.z),delay); //changed to a knockback function instead
         }
-        if(this.gameObject.tag.Equals("Enemy"))
+        if (!(this.phase.Equals("Dead")))
         {
-            Animator anim = this.GetComponent<Animator>();
-            anim.SetTrigger("Knockback");
-        }
-        if(this.gameObject.tag.Equals("Boss"))
-        {
-            Animation anim = this.transform.GetChild(1).GetComponent<Animation>();
-            anim.Play("damage");
+            if (this.gameObject.tag.Equals("Enemy"))
+            {
+                Animator anim = this.GetComponent<Animator>();
+                anim.SetTrigger("Knockback");
+            }
+            if (this.gameObject.tag.Equals("Boss"))
+            {
+                Animation anim = this.transform.GetChild(1).GetComponent<Animation>();
+                anim.Play("damage");
+            }
         }
     }
 
@@ -122,7 +125,8 @@ public class Health : MonoBehaviour {
     public void addHealth(int amount)
     {
         maxHealth = startMaxHealth + amount;
-        health = maxHealth;
+        if(!(this.phase.getPhase().Equals("Dead")))
+            health = maxHealth;
     }
     public void addPickupHealth(int amount)
     {

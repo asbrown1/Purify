@@ -110,7 +110,6 @@
     <Compile Include="Assets\showTarget.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Blade Sounds\Blade Sounds Readme.txt" />
     <None Include="Assets\Models\Key\readME keys.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

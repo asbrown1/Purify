@@ -17,9 +17,7 @@ public class SceneLoader : MonoBehaviour {
 
     public void loadLevel1()
     {
-        PlayerPrefs.SetInt("PlayerExperience", 0);
-        PlayerPrefs.SetInt("PickupHealthGain", 0);
-        PlayerPrefs.SetInt("PickupManaGain", 0);
+        PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("Maze1");
     }
 

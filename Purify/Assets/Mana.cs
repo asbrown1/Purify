@@ -14,6 +14,7 @@ public class Mana : MonoBehaviour {
     public float attackCoolDown = 2;
     public int resLeft = 1;
     public float manaGainRate=4f;
+    int tempPickup = 0;
     int mana;
     float healLeft=0;
     float buffLeft=0;
@@ -124,12 +125,13 @@ public class Mana : MonoBehaviour {
     }
     public void addMana(int amount)
     {
-        maxMana = startMaxMana + amount;
+        maxMana = startMaxMana + amount+tempPickup;
         mana = maxMana;
     }
     public void addPickupMana(int amount)
     {
         maxMana = maxMana + amount;
+        tempPickup = tempPickup + amount;
         mana = maxMana;
     }
 }

@@ -14,6 +14,7 @@ public class Health : MonoBehaviour {
     float particleTime = 0f;
     public int expPerEnemyKilled=5;
     ParticleSystem particles;
+    int tempPickup = 0;
     bool particlesPlaying = false;
     public bool detailedLog = false;
     InfoPrompt infoPrompt;
@@ -71,7 +72,7 @@ public class Health : MonoBehaviour {
                     particles.Play();
                     particlesPlaying = true;
                     if(!(this.gameObject.tag.Equals("Player")))
-                        this.GetComponent<Attack>().disableParticles();
+                        this.GetComponent<Attack>().disableAttackParticles();
                 }
                 particleTime = particleTime - Time.deltaTime;
             }
@@ -93,9 +94,11 @@ public class Health : MonoBehaviour {
     {
         return maxHealth;
     }
-    public void disableParticles()  //Doesn't actually disable particles. More so if particles switch to red for buffs and the particlesPlaying is never set to false
+    public void disableHealthParticles()  //Doesn't actually disable particles. More so if particles switch to red for buffs and the particlesPlaying is never set to false
     {
+        Debug.Log("Disabling Health Particles");
         particlesPlaying = false;
+        particleTime = 0f;
     }
 
     public void reduceHealth(int amount,Vector3 direction,bool delay)
@@ -136,13 +139,14 @@ public class Health : MonoBehaviour {
     }
     public void addHealth(int amount)
     {
-        maxHealth = startMaxHealth + amount;
+        maxHealth = startMaxHealth + amount+tempPickup;
         if(!(this.phase.getPhase().Equals("Dead")))
             health = maxHealth;
     }
     public void addPickupHealth(int amount)
     {
         maxHealth = maxHealth + amount;
+        tempPickup = tempPickup + amount;
         health = maxHealth;
     }
     public void revive()

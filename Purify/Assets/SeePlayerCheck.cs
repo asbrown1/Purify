@@ -16,15 +16,10 @@ public class SeePlayerCheck : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         phase = GetComponent<AIPhase>();
-        if (this.gameObject.tag.Equals("Enemy"))
+        if (this.gameObject.tag.Equals("Enemy")||(this.gameObject.tag.Equals("Boss")))
         {
             targetTag = "FriendlyAI";
             targetTag2 = "Player";
-        }
-        if(this.gameObject.tag.Equals("Boss"))
-        {
-            targetTag = "Player";
-            targetTag2 = "FriendlyAI";
         }
         if (this.gameObject.tag.Equals("FriendlyAI"))
         {
@@ -42,7 +37,7 @@ public class SeePlayerCheck : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         /*Based on user MattVic's sloution at http://answers.unity3d.com/questions/15735/field-of-view-using-raycasting.html*/
-        if (phase.getPhase().Equals("Follow") || phase.getPhase().Equals("Patrol")||phase.getPhase().Equals("AttackAI"))
+        if (phase.getPhase().Equals("Follow") || phase.getPhase().Equals("Patrol"))
         {
             for (int i = 0; i < totalTargets.Length; i++)       //Checks for all targets
             {
@@ -68,10 +63,7 @@ public class SeePlayerCheck : MonoBehaviour {
                                     Debug.Log(this.gameObject.name + " can see " + totalTargets[i].name);
                                 if (!(phase.getPhase().Equals("Attack")))
                                 {
-                                    if (this.tag.Equals("Boss") && !(hit.transform.root.tag.Equals("Player")))
-                                        phase.setPhase("AttackAI");
-                                    else
-                                        phase.setPhase("Attack");
+                                    phase.setPhase("Attack");
                                     targetFound = hit.transform.root.transform.name;
                                     //Debug.Log("Found " + targetFound);
                                 }

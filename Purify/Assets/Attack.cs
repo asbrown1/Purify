@@ -35,7 +35,7 @@ public class Attack : MonoBehaviour {
         if (this.gameObject.name != "Player")
         {
             agent.angularSpeed = agent.speed * 120;
-            if (phase.getPhase().Equals("Attack")|| phase.getPhase().Equals("AttackAI"))
+            if (phase.getPhase().Equals("Attack"))
             {
                 if (detailedLog)
                     Debug.Log(this.gameObject.name + " is in the attack phase");
@@ -152,7 +152,7 @@ public class Attack : MonoBehaviour {
                 {
                     particles.Play();
                     particlesPlaying = true;
-                    this.GetComponent<Health>().disableParticles();
+                    this.GetComponent<Health>().disableHealthParticles();
                 }
                 particleTime = particleTime - Time.deltaTime;
             }
@@ -181,8 +181,9 @@ public class Attack : MonoBehaviour {
     {
         attack = startAttack + amount;
     }
-    public void disableParticles()  //Doesn't actually disable particles. More so if particles switch to green for heals and the particlesPlaying is never set to false
+    public void disableAttackParticles()  //Doesn't actually disable particles. More so if particles switch to green for heals and the particlesPlaying is never set to false
     {
         particlesPlaying = false;
+        particleTime = 0f;
     }
 }

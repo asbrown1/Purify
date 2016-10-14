@@ -25,6 +25,8 @@ public class LoadLevel : MonoBehaviour {
                 PlayerProgress exp = player.GetComponent<PlayerProgress>();
                 exp.gainExperience(expForLevelBeat);
                 PlayerPrefs.SetInt("PlayerExperience", exp.getExperience());
+                Timer time = player.GetComponent<Timer>();
+                time.recordTime();
                 SceneManager.LoadScene(nextLevel);
             }
         }

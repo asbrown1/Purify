@@ -27,7 +27,7 @@ public class SkeletonSpeed : MonoBehaviour {
             Debug.Log(speed);
         if(this.tag.Equals("Enemy") || this.tag.Equals("FriendlyAI"))
             anim.SetFloat("Speed", speed);
-        else if (this.tag.Equals("Boss"))
+        else if (this.tag.Equals("Boss")&&!(bossAnim.IsPlaying("attack01")|| bossAnim.IsPlaying("attack02") || bossAnim.IsPlaying("dead")))
         {
             if (speed < 0.5)
                 bossAnim.Play("stand");

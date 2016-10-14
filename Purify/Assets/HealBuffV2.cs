@@ -15,10 +15,12 @@ public class HealBuffV2 : MonoBehaviour {
     //public float extraDistance = 5;
     //int halfAccuracy;
     Mana mana;
+    Health playerHealth;
 	// Use this for initialization
 	void Start () {
         //halfAccuracy = accuracy / 2;
         mana = GetComponent<Mana>();
+        playerHealth = GetComponent<Health>();
         buffStrength = startBuffStrength;
         healStrength = startHealStrength;
 	}
@@ -54,7 +56,8 @@ public class HealBuffV2 : MonoBehaviour {
             }
         }
         Debug.Log("Closest is " + currentTarget);
-        if ((Input.GetMouseButtonDown(0) && mana.canDoSpell("Heal")) || (Input.GetMouseButtonDown(1) && mana.canDoSpell("Buff"))||(Input.GetKeyDown(KeyCode.R)&&mana.canDoSpell("Res"))) //Left click/Right Click
+        //this should probably be a switch statement
+        if ((Input.GetMouseButtonDown(0) && mana.canDoSpell("Heal")) || (Input.GetMouseButtonDown(1) && mana.canDoSpell("Buff"))||(Input.GetKeyDown(KeyCode.R)&&mana.canDoSpell("Res")) || (Input.GetKeyDown(KeyCode.E)&&mana.canDoSpell("Heal"))) //Left click/Right Click
         {
             GameObject target = GameObject.Find(currentTarget);
             if (Input.GetMouseButtonDown(0))
@@ -78,6 +81,15 @@ public class HealBuffV2 : MonoBehaviour {
                     targetHealth.revive();
                     mana.reduceMana("Res");
                 }
+            }
+
+            //self-heal
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("E has been pressed");
+                //Health playerHealth = this.GetComponent<Health>();
+                playerHealth.getHealth(healStrength);
+                mana.reduceMana("Heal");
             }
         }
     }

@@ -32,4 +32,11 @@ public class SceneLoader : MonoBehaviour {
     {
         SceneManager.LoadScene("Instructions");
     }
+
+    public void exitGame()
+    {
+        //note: app.quit will not run in the editor
+        Application.Quit();
+        Debug.Log("exitGame called");
+    }
 }

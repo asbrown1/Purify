@@ -8,8 +8,9 @@ public class Pickup : MonoBehaviour {
     public float rotationSpeed = 5;
 	// Use this for initialization
 	void Start () {
-	
-	}
+        PlayerPrefs.SetInt("PickupHealthGainTemp", 0);
+        PlayerPrefs.SetInt("PickupManaGainTemp", 0);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,10 +26,12 @@ public class Pickup : MonoBehaviour {
                 health.addPickupHealth(amount);
                 if(permanent)
                 {
-                    if(PlayerPrefs.HasKey("PickupHealthGain"))
+                    if (PlayerPrefs.HasKey("PickupHealthGainTemp"))
                     {
-                        PlayerPrefs.SetInt("PickupHealthGain", PlayerPrefs.GetInt("PickupHealthGain") + amount);
+                        PlayerPrefs.SetInt("PickupHealthGainTemp", PlayerPrefs.GetInt("PickupHealthGainTemp") + amount);
                     }
+                    else
+                        PlayerPrefs.SetInt("PickupHealthGainTemp", amount);
                 }
             }
             if(type.Equals("Mana"))
@@ -37,10 +40,12 @@ public class Pickup : MonoBehaviour {
                 mana.addPickupMana(amount);
                 if (permanent)
                 {
-                    if (PlayerPrefs.HasKey("PickupManaGain"))
+                    if (PlayerPrefs.HasKey("PickupManaGainTemp"))
                     {
-                        PlayerPrefs.SetInt("PickupManaGain", PlayerPrefs.GetInt("PickupManaGain") + amount);
+                        PlayerPrefs.SetInt("PickupManaGainTemp", PlayerPrefs.GetInt("PickupManaGainTemp") + amount);
                     }
+                    else
+                        PlayerPrefs.SetInt("PickupManaGainTemp", amount);
                 }
             }
             Destroy(this.gameObject);

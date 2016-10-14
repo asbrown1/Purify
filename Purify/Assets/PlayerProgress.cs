@@ -35,16 +35,18 @@ public class PlayerProgress : MonoBehaviour {
 	void Update () {
 	if(!hasCheckedStart)    //Basically a late 'start' as some things need to run after other scripts start
         {
-            if (PlayerPrefs.HasKey("PickupHealthGain"))
+            /*if (PlayerPrefs.HasKey("PickupHealthGain"))
             {
-                healthGainLevel = healthGainLevel = PlayerPrefs.GetInt("PickupHealthGain");
+                healthGainLevel = healthGainLevel + PlayerPrefs.GetInt("PickupHealthGain");
+                Debug.Log("Health gain from pickups: " + PlayerPrefs.GetInt("PickupHealthGain"));
+                Debug.Log("This Exists!");
             }
             if (PlayerPrefs.HasKey("PickupManaGain"))
             {
-                manaGainLevel = manaGainLevel = PlayerPrefs.GetInt("PickupManaGain");
-            }
+                manaGainLevel = manaGainLevel + PlayerPrefs.GetInt("PickupManaGain");
+            }*/
             checkExpLevel();
-            hasCheckedStart = false;
+            hasCheckedStart = true;
         }
 	}
 
@@ -80,8 +82,8 @@ public class PlayerProgress : MonoBehaviour {
             Mana mana = GetComponent<Mana>();
             Health health = GetComponent<Health>();
             attack.addStrength(attackGainLevel*expLevel);
-            mana.addMana(manaGainLevel*expLevel);
-            health.addHealth(healthGainLevel*expLevel);
+            mana.addMana(manaGainLevel*expLevel + PlayerPrefs.GetInt("PickupManaGain"));
+            health.addHealth(healthGainLevel*expLevel + PlayerPrefs.GetInt("PickupHealthGain"));
         }
     }
 }

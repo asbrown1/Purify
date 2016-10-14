@@ -40,7 +40,19 @@ public class LoadLevel : MonoBehaviour {
             time.recordTime();
             exp.gainExperience(expForLevelBeat);
             PlayerPrefs.SetInt("PlayerExperience", exp.getExperience());
+            savePickupGain();
             SceneManager.LoadScene(nextLevel);
         }
+    }
+    void savePickupGain()
+    {
+        if (PlayerPrefs.HasKey("PickupHealthGain"))
+            PlayerPrefs.SetInt("PickupHealthGain", PlayerPrefs.GetInt("PickupHealthGainTemp") + PlayerPrefs.GetInt("PickupHealthGain"));
+        else
+            PlayerPrefs.SetInt("PickupHealthGain", PlayerPrefs.GetInt("PickupHealthGainTemp"));
+        if (PlayerPrefs.HasKey("PickupManaGain"))
+            PlayerPrefs.SetInt("PickupManaGain", PlayerPrefs.GetInt("PickupManaGainTemp") + PlayerPrefs.GetInt("PickupManaGain"));
+        else
+            PlayerPrefs.SetInt("PickupManaGain", PlayerPrefs.GetInt("PickupManaGainTemp"));
     }
 }

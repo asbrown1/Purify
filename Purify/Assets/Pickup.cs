@@ -6,16 +6,19 @@ public class Pickup : MonoBehaviour {
     public int amount;
     public bool permanent;
     public float rotationSpeed = 5;
+    InfoPrompt infoPrompt;
 	// Use this for initialization
 	void Start () {
         PlayerPrefs.SetInt("PickupHealthGainTemp", 0);
         PlayerPrefs.SetInt("PickupManaGainTemp", 0);
+        infoPrompt = GameObject.FindGameObjectWithTag("Info").GetComponent<InfoPrompt>();
+        Debug.Log(infoPrompt);
     }
 	
 	// Update is called once per frame
 	void Update () {
         this.transform.Rotate(0, rotationSpeed, 0);
-	}
+    }
     void OnTriggerEnter(Collider other)
     {
         if(other.transform.root.tag.Equals("Player"))
@@ -32,7 +35,10 @@ public class Pickup : MonoBehaviour {
                     }
                     else
                         PlayerPrefs.SetInt("PickupHealthGainTemp", amount);
+                    infoPrompt.showText("+ " + amount + " Health");
                 }
+                else
+                    infoPrompt.showText("+ " + amount + " Health (for the level)");
             }
             if(type.Equals("Mana"))
             {
@@ -46,7 +52,10 @@ public class Pickup : MonoBehaviour {
                     }
                     else
                         PlayerPrefs.SetInt("PickupManaGainTemp", amount);
+                    infoPrompt.showText("+ " + amount + "Mana");
                 }
+                else
+                    infoPrompt.showText("+ " + amount + " Mana (for the level)");
             }
             Destroy(this.gameObject);
         }

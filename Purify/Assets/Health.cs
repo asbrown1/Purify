@@ -15,6 +15,7 @@ public class Health : MonoBehaviour {
     public int expPerEnemyKilled=5;
     ParticleSystem particles;
     public bool detailedLog = false;
+    InfoPrompt infoPrompt;
     // Use this for initialization
     void Start () {
         phase = this.GetComponent<AIPhase>();
@@ -24,6 +25,7 @@ public class Health : MonoBehaviour {
         regenTimePerHP = 1 / regenRatePerSecond;
         if (GetComponent<ParticleSystem>())
             particles = GetComponent<ParticleSystem>();
+        infoPrompt = GameObject.FindGameObjectWithTag("Info").GetComponent<InfoPrompt>();
     }
 	
 	// Update is called once per frame
@@ -44,6 +46,8 @@ public class Health : MonoBehaviour {
                 {
                     Animator anim=this.GetComponent<Animator>();
                     anim.SetTrigger("Death");
+                    infoPrompt.showText("A friendly teammate has died");
+
                 }
                 phase.setPhase("Dead");
             }

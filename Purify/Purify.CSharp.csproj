@@ -81,6 +81,7 @@
     <Compile Include="Assets\HealBuff.cs" />
     <Compile Include="Assets\HealBuffV2.cs" />
     <Compile Include="Assets\Health.cs" />
+    <Compile Include="Assets\InfoPrompt.cs" />
     <Compile Include="Assets\KeyGet.cs" />
     <Compile Include="Assets\Keys.cs" />
     <Compile Include="Assets\LoadLevel.cs" />

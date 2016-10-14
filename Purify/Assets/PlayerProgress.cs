@@ -14,6 +14,7 @@ public class PlayerProgress : MonoBehaviour {
     public int healthGainLevel;
     public int healStrengthGainLevel;
     public int buffStrengthGainLevel;
+    InfoPrompt infoPrompt;
     bool hasCheckedStart = false;
 	// Use this for initialization
 	void Start () {
@@ -29,6 +30,7 @@ public class PlayerProgress : MonoBehaviour {
             PlayerPrefs.SetInt("PlayerExpereince", 0);
             experience = 0;
         }
+        infoPrompt = GameObject.FindGameObjectWithTag("Info").GetComponent<InfoPrompt>();
     }
 	
 	// Update is called once per frame
@@ -84,6 +86,8 @@ public class PlayerProgress : MonoBehaviour {
             attack.addStrength(attackGainLevel*expLevel);
             mana.addMana(manaGainLevel*expLevel + PlayerPrefs.GetInt("PickupManaGain"));
             health.addHealth(healthGainLevel*expLevel + PlayerPrefs.GetInt("PickupHealthGain"));
+            if (hasCheckedStart)
+                infoPrompt.showText("Level Up: You are now at level " + (expLevel+1));
         }
     }
 }

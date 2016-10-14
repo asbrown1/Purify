@@ -5,6 +5,7 @@ public class Attack : MonoBehaviour {
     AIPhase phase;
     SeePlayerCheck targetGet;
     NavMeshAgent agent;
+    bool particlesPlaying = false;
     public float rechargeTime=3.0f;
     float timeLeft=0.0f;
     float buffTime = 0.0f;
@@ -147,12 +148,18 @@ public class Attack : MonoBehaviour {
         {
             if (particleTime > 0)
             {
-                particles.Play();
+                if (!(particlesPlaying))
+                {
+                    particles.Play();
+                    particlesPlaying = true;
+                    this.GetComponent<Health>().disableParticles();
+                }
                 particleTime = particleTime - Time.deltaTime;
             }
             else if(particles.startColor==Color.red)
             {
                 particles.Stop();
+                particlesPlaying = false;
             }
         }
     }
@@ -173,5 +180,9 @@ public class Attack : MonoBehaviour {
     public void gainAttack(int amount)
     {
         attack = startAttack + amount;
+    }
+    public void disableParticles()  //Doesn't actually disable particles. More so if particles switch to green for heals and the particlesPlaying is never set to false
+    {
+        particlesPlaying = false;
     }
 }

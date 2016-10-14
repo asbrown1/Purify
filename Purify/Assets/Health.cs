@@ -14,6 +14,7 @@ public class Health : MonoBehaviour {
     float particleTime = 0f;
     public int expPerEnemyKilled=5;
     ParticleSystem particles;
+    bool particlesPlaying = false;
     public bool detailedLog = false;
     InfoPrompt infoPrompt;
     // Use this for initialization
@@ -65,12 +66,18 @@ public class Health : MonoBehaviour {
         {
             if (particleTime > 0)
             {
-                particles.Play();
+                if (!(particlesPlaying))
+                {
+                    particles.Play();
+                    particlesPlaying = true;
+                    this.GetComponent<Attack>().disableParticles();
+                }
                 particleTime = particleTime - Time.deltaTime;
             }
             else if(particles.startColor == Color.green)
             {
                 particles.Stop();
+                particlesPlaying = false;
             }
         }
 
@@ -84,6 +91,10 @@ public class Health : MonoBehaviour {
     public int getMaxHealth()
     {
         return maxHealth;
+    }
+    public void disableParticles()  //Doesn't actually disable particles. More so if particles switch to red for buffs and the particlesPlaying is never set to false
+    {
+        particlesPlaying = false;
     }
 
     public void reduceHealth(int amount,Vector3 direction,bool delay)

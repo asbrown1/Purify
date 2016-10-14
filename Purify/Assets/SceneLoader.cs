@@ -32,7 +32,10 @@ public class SceneLoader : MonoBehaviour {
     {
         SceneManager.LoadScene("Instructions");
     }
-
+    public void loadInstructions2()
+    {
+        SceneManager.LoadScene("Instructions2");
+    }
     public void exitGame()
     {
         //note: app.quit will not run in the editor

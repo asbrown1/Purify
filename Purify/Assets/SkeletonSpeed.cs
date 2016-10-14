@@ -12,7 +12,7 @@ public class SkeletonSpeed : MonoBehaviour {
     // Use this for initialization
     void Start () {
         body = this.GetComponent<Rigidbody>();
-        if (this.tag.Equals("Enemy")||this.tag.Equals("FriendlyAI"))
+        if (this.tag.Equals("Enemy"))
             anim = this.GetComponent<Animator>();
         if (this.tag.Equals("Boss"))
             bossAnim = this.transform.GetChild(1).GetComponent<Animation>();
@@ -25,7 +25,7 @@ public class SkeletonSpeed : MonoBehaviour {
         speed = Vector3.Magnitude((position-lastPosition)/Time.deltaTime);
         if(detailedLog)
             Debug.Log(speed);
-        if(this.tag.Equals("Enemy") || this.tag.Equals("FriendlyAI"))
+        if(this.tag.Equals("Enemy"))
             anim.SetFloat("Speed", speed);
         else if (this.tag.Equals("Boss"))
         {

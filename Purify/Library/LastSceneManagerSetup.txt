@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Maze1.unity
-=======
-- path: Assets/Menu.unity
->>>>>>> origin/master
   isLoaded: 1
   isActive: 1

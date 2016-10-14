@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: c84dd627fe35fa642a387a78587b9e4f
 timeCreated: 1476271599
-=======
-guid: 6f85ddea460e80e45b1badd5bead06f2
-timeCreated: 1476274260
->>>>>>> origin/master
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -42,14 +37,7 @@ ModelImporter:
     4300006: Box001
     4300008: Low_Poly_Characte_000
     4300010: Cylinder001
-<<<<<<< HEAD
     7400000: Take 001
-=======
-    7400000: Walk
-    7400002: Idle
-    7400004: Attack
-    7400006: Death
->>>>>>> origin/master
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -71,179 +59,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-<<<<<<< HEAD
     clipAnimations: []
-=======
-    clipAnimations:
-    - serializedVersion: 16
-      name: Idle
-      takeName: Take 001
-      firstFrame: 0
-      lastFrame: 80
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Box001
-        weight: 1
-      - path: Box002
-        weight: 1
-      - path: Cylinder001
-        weight: 1
-      - path: Cylinder002
-        weight: 1
-      - path: Low_Poly_Characte_000
-        weight: 1
-      - path: Torus001
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Walk
-      takeName: Take 001
-      firstFrame: 81
-      lastFrame: 180
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Box001
-        weight: 1
-      - path: Box002
-        weight: 1
-      - path: Cylinder001
-        weight: 1
-      - path: Cylinder002
-        weight: 1
-      - path: Low_Poly_Characte_000
-        weight: 1
-      - path: Torus001
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Attack
-      takeName: Take 001
-      firstFrame: 180
-      lastFrame: 300
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Box001
-        weight: 1
-      - path: Box002
-        weight: 1
-      - path: Cylinder001
-        weight: 1
-      - path: Cylinder002
-        weight: 1
-      - path: Low_Poly_Characte_000
-        weight: 1
-      - path: Torus001
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Death
-      takeName: Take 001
-      firstFrame: 301
-      lastFrame: 400
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Box001
-        weight: 1
-      - path: Box002
-        weight: 1
-      - path: Cylinder001
-        weight: 1
-      - path: Cylinder002
-        weight: 1
-      - path: Low_Poly_Characte_000
-        weight: 1
-      - path: Torus001
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
->>>>>>> origin/master
     isReadable: 1
   meshes:
     lODScreenPercentages: []

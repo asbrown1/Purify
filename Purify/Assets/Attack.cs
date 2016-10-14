@@ -66,7 +66,7 @@ public class Attack : MonoBehaviour {
                                 if (detailedLog)
                                     Debug.Log(this.gameObject.name + " is attacking " + target.gameObject.name);
                                 //Attack animation goes here
-                                if(this.gameObject.tag.Equals("Enemy")||this.gameObject.tag.Equals("FriendlyAI"))
+                                if(this.gameObject.tag.Equals("Enemy"))
                                 {
                                     Animator anim = this.GetComponent<Animator>();
                                     anim.SetTrigger("Attack");

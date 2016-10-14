@@ -70,7 +70,8 @@ public class Health : MonoBehaviour {
                 {
                     particles.Play();
                     particlesPlaying = true;
-                    this.GetComponent<Attack>().disableParticles();
+                    if(!(this.gameObject.tag.Equals("Player")))
+                        this.GetComponent<Attack>().disableParticles();
                 }
                 particleTime = particleTime - Time.deltaTime;
             }

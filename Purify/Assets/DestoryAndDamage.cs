@@ -39,7 +39,7 @@ public class DestoryAndDamage : MonoBehaviour {
             {
                 Debug.Log("Bullet collided with" + colliderName);
                 colliderHealth = colliderTarget.GetComponent<Health>();
-                colliderHealth.reduceHealth(bulletDamage);
+                colliderHealth.reduceHealth(bulletDamage,Vector3.Normalize(-velocity),false);
                 Debug.Log("Bullet destroyed as collided with character");
                 Destroy(this.gameObject);
             }

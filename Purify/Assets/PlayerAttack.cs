@@ -118,7 +118,7 @@ public class PlayerAttack : MonoBehaviour {
                     Debug.Log(targetHit.transform.tag);
                     targetBody = targetHit.GetComponent<Rigidbody>();
                     hitHealth = targetHit.GetComponent<Health>();
-                    hitHealth.reduceHealth(attackDamage);
+                    hitHealth.reduceHealth(attackDamage,this.transform.position-targetHit.transform.position,false);
                     hasHit = true;
                     targetBody.AddForce((this.transform.forward/this.transform.forward.magnitude)*knockbackStrength);
                 }

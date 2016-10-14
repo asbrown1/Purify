@@ -8,6 +8,8 @@ public class Move : MonoBehaviour
     public float rotationSpeed = 5f;
     public double knockBackTime = 0.5;
     public Camera mainCam;
+    bool delay = false;
+    Vector3 knockBackDirection = new Vector3(0, 0, 0);
     // Use this for initialization
     void Start()
     {
@@ -23,10 +25,13 @@ public class Move : MonoBehaviour
         /*Moves relative to camera, but not in vertical axis*/
 
         //player is currently being knocked back
-        if (knockBackTime < 0.5)
+        if (knockBackTime < 1.2)
         {
             knockBackTime = knockBackTime + Time.deltaTime;
-            movement = playerMovement * -movementSpeed * Time.deltaTime;
+            if (knockBackTime > 0.6||!delay)
+            {
+                movement = knockBackDirection * -movementSpeed * Time.deltaTime;
+            }
         }
         
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
@@ -65,8 +70,10 @@ public class Move : MonoBehaviour
     }
 
     //player knockback on being hit by enemies
-    public void knockBack()
+    public void knockBack(Vector3 direction,bool hasDelay)
     {
         knockBackTime = 0;
+        knockBackDirection = direction;
+        delay = hasDelay;
     }
 }

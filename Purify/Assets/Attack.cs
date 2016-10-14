@@ -80,7 +80,7 @@ public class Attack : MonoBehaviour {
                                     else
                                         anim.Play("attack02");
                                 }
-                                targetHealth.reduceHealth(attack + buffAttack);
+                                targetHealth.reduceHealth(attack + buffAttack,Vector3.Normalize(this.transform.position-target.transform.position),true);
                                 if (target.name != "Player")
                                     setTargetToAttacker(target);
                                 timeLeft = rechargeTime;
@@ -106,7 +106,7 @@ public class Attack : MonoBehaviour {
                             rayDirection = target.transform.position - this.transform.position;
                             if (Physics.Raycast(transform.position, rayDirection, out hit))
                             {
-                                if (!(hit.collider.gameObject.transform.root.gameObject.tag.Equals("Environment")))
+                                if (!(hit.collider.gameObject.transform.root.gameObject.tag.Equals("Environment")||hit.collider.gameObject.transform.root.GetComponent<AIPhase>().getPhase().Equals("Dead")))
                                 {
                                     Vector3 bulletStart = transform.position;
                                     GameObject newBullet = (GameObject)Instantiate(bullet, bulletStart, Quaternion.identity);

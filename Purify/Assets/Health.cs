@@ -82,7 +82,7 @@ public class Health : MonoBehaviour {
         return maxHealth;
     }
 
-    public void reduceHealth(int amount)
+    public void reduceHealth(int amount,Vector3 direction,bool delay)
     {
         //Knockback animation goes here (might need to script position too)
         health = health - amount;
@@ -91,7 +91,7 @@ public class Health : MonoBehaviour {
         if(this.transform.tag.Equals("Player"))
         {
             Move move = this.GetComponent<Move>();
-            move.knockBack(); //changed to a knockback function instead
+            move.knockBack(new Vector3(direction.x,0,direction.z),delay); //changed to a knockback function instead
         }
         if(this.gameObject.tag.Equals("Enemy"))
         {

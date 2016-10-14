@@ -22,6 +22,6 @@ public class ShowExperience : MonoBehaviour {
         experience = playerProgress.getExperience();
         level = playerProgress.getExpLevel();
         nextLevelExp = playerProgress.getExpNextLevel();
-        expText.text = "Level: " + level + "\nExperience" + experience + "/" + nextLevelExp;
+        expText.text = "Level: " + (level+1) + "\nExperience: " + experience + "/" + nextLevelExp;
 	}
 }
